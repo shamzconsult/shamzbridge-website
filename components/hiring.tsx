@@ -79,7 +79,7 @@ export default async function HiringAdvert() {
                           )}
                         </ul>
                       </div>
-                      <div className="flex justify-center gap-10 sm:justify-start">
+                      <div className="flex flex-col justify-center gap-10 sm:flex-row sm:justify-start">
                         <div className="flex flex-col items-center text-sm text-slate-400 sm:flex-row ">
                           <span className="mr-3 w-1.5 h-1.5 bg-orange-500 rounded-full hidden sm:flex"></span>
                           <time>Posted:</time>
