@@ -1,13 +1,12 @@
 import React from "react";
 import { getAllJob } from "@/app/services/careerService";
 import Footer from "./ui/footer";
-import Link from "next/link";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
-interface JobType {
+export type JobType = {
   title: string;
   mode: string;
   location: string;
@@ -17,7 +16,7 @@ interface JobType {
   closing: string;
   formId: string;
   createdAt: string;
-}
+};
 
 export default async function HiringAdvert() {
   const data = await getAllJob();
