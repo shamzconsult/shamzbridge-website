@@ -14,7 +14,7 @@ interface EventType {
   endDate: number;
   title: string;
   description: string;
-  gallery?: string;
+  registrationLink?: string;
 }
 
 export const getEventById = async (_id: string) => {
@@ -86,19 +86,14 @@ const EventPreview = () => {
               <p> {formatDate(event.endDate)}</p>
             </div>
           </div>
-          {event.gallery && (
-            <div className="text-gray-500 flex flex-col gap-2">
-              <h1 className="text-xl font-semibold text-orange-600 ">
-                Gallery
-              </h1>
-              <a
-                href={event.gallery}
-                target="_blank"
-                className="font-normal  text-blue-500 hover:underline"
-              >
-                Click here to view event pictures
-              </a>
-            </div>
+          {event.registrationLink && (
+            <a
+              href={event.registrationLink}
+              target="_blank"
+              className="font-normal  text-blue-500 hover:underline"
+            >
+              Click here to register for this event
+            </a>
           )}
         </div>
       )}

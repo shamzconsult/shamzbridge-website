@@ -31,7 +31,7 @@ const PUT = async (request: any, { params }: { params: { _id: string } }) => {
       newDescription: description,
       newStartDate: startDate,
       newEndDate: endDate,
-      newGallery: gallery,
+      newRegistrationLink: registrationLink,
     } = await request.json();
     await connectMongoDB();
     await UpcomingEvent.findByIdAndUpdate(id, {
@@ -40,7 +40,7 @@ const PUT = async (request: any, { params }: { params: { _id: string } }) => {
       description,
       startDate,
       endDate,
-      gallery,
+      registrationLink,
     });
     return NextResponse.json(
       { message: "Event updated successfully!!" },
