@@ -86,7 +86,7 @@ const EventPreview = () => {
               <p> {formatDate(event.endDate)}</p>
             </div>
           </div>
-          {event.registrationLink && (
+          {event.registrationLink && new Date(event.endDate) > new Date() && (
             <a
               href={event.registrationLink}
               target="_blank"
