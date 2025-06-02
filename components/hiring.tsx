@@ -3,6 +3,7 @@ import { getAllJob } from "@/app/services/careerService";
 import Footer from "./ui/footer";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import ContactButton from "./ContactButton";
 
 dayjs.extend(relativeTime);
 
@@ -26,15 +27,8 @@ export default async function HiringAdvert() {
   return (
     <>
       <section className="min-h-screen max-w-6xl mx-auto px-4 sm:px-6 mb-8">
-        <div className="mt-1 text-center mb-8 sm:mb-0 sm:text-right ">
-          <a
-            href="mailto:shamzbridgeconsult@gmail.com?subject=Contacting%20you%20about%20hiring%20service%20with%20Shamzbridge&body=Hi, %0D%0A%0D%0A"
-            target="_blank"
-            rel="noopener"
-            className="text-sm bg-orange-500 p-4 rounded-lg text-white font-medium hover:bg-orange-700"
-          >
-            Want to hire? Contact us
-          </a>
+         <div className="mt-1 text-center mb-8 sm:mb-0 sm:text-right">
+          <ContactButton /> 
         </div>
 
         <div>
