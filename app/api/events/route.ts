@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 const POST = async (request: any) => {
   try {
-    const { image, startDate, endDate, title, description, gallery } =
+    const { image, startDate, endDate, title, description, registrationLink } =
       await request.json();
     await connectMongoDB();
 
@@ -14,7 +14,7 @@ const POST = async (request: any) => {
       endDate,
       title,
       description,
-      gallery,
+      registrationLink,
     });
     return NextResponse.json(
       { message: "New event details added successfully" },

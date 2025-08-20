@@ -14,10 +14,11 @@ export default function EditEventForm({
   description,
   startDate,
   endDate,
-  galleryLink,
+  registrationLink,
 }: any) {
   const [newImage, setNewImage] = useState(image);
-  const [newGallery, setNewGallery] = useState(galleryLink);
+  const [newRegistrationLink, setNewRegistrationLink] =
+    useState(registrationLink);
   const [newTitle, setNewTitle] = useState(title);
   const [newDescription, setNewDescription] = useState(description);
   const [newStartDate, setNewStartDate] = useState(startDate);
@@ -49,7 +50,7 @@ export default function EditEventForm({
           newDescription,
           newStartDate,
           newEndDate,
-          newGallery,
+          newRegistrationLink,
         }),
       });
       if (res.ok) {
@@ -110,10 +111,10 @@ export default function EditEventForm({
           required
         />
         <input
-          onChange={(e) => setNewGallery(e.target.value)}
-          value={newGallery}
+          onChange={(e) => setNewRegistrationLink(e.target.value)}
+          value={newRegistrationLink}
           type="url"
-          placeholder="https://drive.google.com/file/d/1yJNHSqUaiTq685BVOO7yhlbG7PI78Foj/view?usp=sharing"
+          placeholder="Update event registration link"
           className="border border-slate-400 focus:border-red-400 w-full p-2 outline-none placeholder:opacity-50"
         />
         <button

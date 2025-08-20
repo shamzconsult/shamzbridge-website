@@ -22,25 +22,25 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed w-full z-30 md:bg-opacity-90 py-4 transition duration-300 ease-in-out border-b ${
+      className={`fixed w-full bg-white  z-0 md:bg-opacity -90 py-4 transition duration-300 ease-in-out border-b ${
         !top ? "bg-white backdrop-blur-sm shadow-lg" : ""
       }`}
     >
-      <div className='max-w-6xl mx-auto px-5 sm:px-6'>
-        <div className='flex items-center justify-between h-16 md:h-20'>
+      <div className="max-w-6xl mx-auto px-5 sm:px-6">
+        <div className="flex items-center justify-between h-16 md:h-20">
           {/* Site branding */}
           <Link href={"/"}>
             <Logo />
           </Link>
 
           {/* Desktop navigation */}
-          <nav className='hidden md:flex md:grow'>
+          <nav className="hidden md:flex md:grow">
             {/* Desktop sign in links */}
-            <ul className='flex grow justify-end flex-wrap items-center'>
+            <ul className="flex grow justify-end flex-wrap items-center">
               <li>
                 <Link
-                  href='/#about'
-                  className='font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out'
+                  href="/#about"
+                  className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out"
                 >
                   About us
                 </Link>
@@ -48,31 +48,31 @@ export default function Header() {
               <li>
                 <Link
                   href={"/events"}
-                  className='font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out'
+                  className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out"
                 >
                   Events
                 </Link>
               </li>
               <li>
                 <Link
-                  href='/#service'
-                  className='font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out'
+                  href="/services"
+                  className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out"
                 >
                   Services
                 </Link>
               </li>
               <li>
                 <Link
-                  href='/#testimonial'
-                  className='font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out'
+                  href="/#testimonial"
+                  className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out"
                 >
                   Testimonials
                 </Link>
               </li>
               <li>
                 <Link
-                  href='/careers'
-                  className='font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out'
+                  href="/careers"
+                  className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out"
                 >
                   Careers
                 </Link>

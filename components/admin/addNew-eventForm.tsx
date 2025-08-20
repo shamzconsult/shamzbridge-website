@@ -6,7 +6,7 @@ import { EventAlert } from "../utils/login-alert";
 
 export default function AddNewEventForm() {
   const [image, setImage] = useState("");
-  const [gallery, setGallery] = useState("");
+  const [registrationLink, setRegistrationLink] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -28,7 +28,7 @@ export default function AddNewEventForm() {
         },
         body: JSON.stringify({
           image,
-          gallery,
+          registrationLink,
           title,
           description,
           startDate,
@@ -91,11 +91,12 @@ export default function AddNewEventForm() {
         required
       />
       <input
-        onChange={(e) => setGallery(e.target.value)}
-        value={gallery}
+        onChange={(e) => setRegistrationLink(e.target.value)}
+        value={registrationLink}
         type="url"
-        placeholder="https://drive.google.com/file/d/1yJNHSqUaiTq685BVOO7yhlbG7PI78Foj/view?usp=sharing"
+        placeholder="Add event registration link here.."
         className="rounded-md border border-slate-200 w-full p-2 outline-none placeholder:opacity-50"
+        required
       />
       <button
         type="submit"

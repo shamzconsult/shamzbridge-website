@@ -10,6 +10,7 @@ interface EventType {
   _id: number;
   isActive: boolean;
   endDate: number;
+  registrationLink: string;
 }
 
 export const getCurrentEvent = async () => {
@@ -93,16 +94,27 @@ const UpcomingEvent = () => {
           </button>
         </div>
         {event && (
-          <Link href={`/events/${event._id}`}>
-            <img
-              className="max-h-[600px] h-full w-full rounded object-contain object-top cursor-pointer"
-              src={event.image}
-              alt="event"
-            />
-            <p className="text-sm text-orange-400 text-center font-semibold">
-              Click for more details
-            </p>
-          </Link>
+          <div>
+            <Link href={`/events/${event._id}`}>
+              <img
+                className="max-h-[600px] h-full w-full rounded object-contain object-top cursor-pointer"
+                src={event.image}
+                alt="event"
+              />
+            </Link>
+            <div className="flex justify-between">
+              <Link href={`/events/${event._id}`}>
+                <p className="text-sm text-orange-400 text-center font-semibold hover:underline duration-150">
+                  Click for more details
+                </p>
+              </Link>
+              <a href={event.registrationLink} target="_blank">
+                <p className="text-sm text-orange-400 text-center font-semibold hover:underline duration-150">
+                  Register for event
+                </p>
+              </a>
+            </div>
+          </div>
         )}
       </main>
     </div>
