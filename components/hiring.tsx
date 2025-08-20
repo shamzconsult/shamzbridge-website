@@ -21,7 +21,7 @@ export type JobType = {
 export default async function HiringAdvert() {
   const data = await getAllJob();
   const jobs: JobType[] = data.jobs || [];
-  const totalJobs = jobs.length;
+  const totalJobs = jobs?.length;
 
   return (
     <>

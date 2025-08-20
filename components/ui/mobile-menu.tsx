@@ -89,7 +89,7 @@ export default function MobileMenu() {
             </Link>
 
             <a
-              href="/#service"
+              href="/services"
               className="flex font-medium w-full text-gray-600 hover:text-gray-900 py-2 justify-center"
               onClick={() => setMobileNavOpen(false)}
             >
