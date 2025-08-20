@@ -80,10 +80,11 @@ const Events = () => {
         <div className="flex flex-col justify-center items-center gap-20 text-gray-600 p-8">
           <section className="flex flex-col justify-center items-center gap-6">
             <h1 className="font-bold text-lg">Upcoming Events</h1>
+            <p>Discover upcoming opportunities to gain insights, build meaningful networks, and unlock growth.</p>
             <div className="flex flex-wrap justify-center items-start gap-8">
               {filteredUpcomingEvents.length > 0 ? (
                 filteredUpcomingEvents.map(
-                  ({ image, startDate, endDate, title, _id, isActive }) =>
+                  ({ image, startDate, endDate, title, _id, isActive, description }) =>
                     isActive && (
                       <Link
                         href={`/events/${_id}`}
@@ -99,10 +100,23 @@ const Events = () => {
                           <h2 className="opacity-70 font-bold truncate max-w-[150px] xl:max-w-[200px]">
                             {title}
                           </h2>
+                           <div>
+                            <h3 className="opacity-70 truncate max-w-[450px] md:max-w-[650px] xl:max-w-[400px]">
+                              {description}
+                            </h3>
+                          </div>
                           <div className="flex gap-4">
                             <p>{formatDate(startDate)}</p>
                             <h1 className="bold text-lg">-</h1>
                             <p>{formatDate(endDate)}</p>
+                          </div>
+                          <div className="w-full mt-2">
+                            <a href="" className="flex justify-center items-center gap-2 w-full bg-orange-500  hover:bg-orange-600 text-white font-medium py-3 px-4 rounded-md transition-colors">
+                              Register Now 
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                              </svg>
+                            </a>
                           </div>
                         </div>
                       </Link>
@@ -115,10 +129,11 @@ const Events = () => {
           </section>
           <section className="flex flex-col justify-center items-center gap-6">
             <h1 className="font-bold text-lg">Past Events</h1>
+            <p>Explore highlights from our past events and the positive change they have created.</p>
             <div className="flex flex-wrap justify-center items-start gap-8">
               {filteredPastEvents.length > 0 ? (
                 filteredPastEvents.map(
-                  ({ image, startDate, endDate, title, isActive, _id }) =>
+                  ({ image, startDate, endDate, title, isActive, _id, description }) =>
                     isActive && (
                       <Link
                         href={`/events/${_id}`}
@@ -134,6 +149,9 @@ const Events = () => {
                           <h2 className="opacity-70 font-bold truncate max-w-[150px] xl:max-w-[200px]">
                             {title}
                           </h2>
+                          <div>
+                            <h3 className="opacity-70 truncate max-w-[450px] md:max-w-[650px] xl:max-w-[400px]">{description}</h3>
+                          </div>
                           <div className="flex gap-4">
                             <p>{formatDate(startDate)}</p>
                             <h1 className="bold text-lg">-</h1>
