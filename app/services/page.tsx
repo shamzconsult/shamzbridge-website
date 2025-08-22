@@ -166,7 +166,9 @@ export default function ServicesPage() {
         {/* Hero Section */}
         <section className="pt-24 pb-16 mt-[80px] bg-gradient-to-br from-blue-900 to-teal-700 text-white">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="font-serif text-5xl font-bold mb-6">Our Services</h1>
+            <h1 className=" text-3xl md:text-5xl font-bold mb-6">
+              Our Services
+            </h1>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto">
               Explore our diverse offerings and experience unparalleled
               excellence from tailored solutions to personalized consultations.
@@ -188,8 +190,8 @@ export default function ServicesPage() {
                   <div className={index % 2 === 1 ? "lg:col-start-2" : ""}>
                     <div className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 h-full bg-white rounded-lg">
                       <div className="p-8">
-                        <service.icon className="h-16 w-16 text-amber-500 mb-6" />
-                        <h3 className="font-serif text-3xl font-bold text-blue-900 mb-4">
+                        <service.icon className="h-10 w-10 text-orange-600 mb-6" />
+                        <h3 className=" text-xl md:text-2xl  font-bold text-orange-600 mb-4">
                           {service.title}
                         </h3>
                         <p className="text-lg text-gray-600 mb-6">
@@ -214,7 +216,7 @@ export default function ServicesPage() {
                           href="mailto:shamzbridgeconsult@gmail.com?subject=Contacting%20you%20about%20hiring%20service%20with%20Shamzbridge&body=Hi, %0D%0A%0D%0A"
                           target="_blank"
                           rel="noopener"
-                          className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-md font-medium text-lg transition-colors duration-200"
+                          className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-2 rounded-md font-medium text-lg transition-colors duration-200"
                         >
                           Get Consultation
                         </a>
@@ -248,7 +250,7 @@ export default function ServicesPage() {
         {/* CTA Section */}
         <section className="py-20 bg-blue-900 text-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="font-serif text-4xl font-bold mb-6">
+            <h2 className=" text-2xl md:text-4xl font-bold mb-6">
               Ready to Get Started?
             </h2>
             <p className="text-xl text-blue-100 mb-8">
@@ -260,7 +262,7 @@ export default function ServicesPage() {
                 href="mailto:shamzbridgeconsult@gmail.com?subject=Contacting%20you%20about%20hiring%20service%20with%20Shamzbridge&body=Hi, %0D%0A%0D%0A"
                 target="_blank"
                 rel="noopener"
-                className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-md font-medium text-lg transition-colors duration-200"
+                className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-md font-medium text-lg transition-colors duration-200"
               >
                 Schedule a Consultation
               </a>
