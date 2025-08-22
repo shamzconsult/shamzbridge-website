@@ -26,7 +26,9 @@ export default function ServicesPage() {
         "Active stakeholder engagement",
         "Continuous monitoring and evaluation",
       ],
-      caseStudy: "Case Study: [Details to be provided]",
+      img: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1755856677/69770a14-91c1-49b3-a865-989d700caab0_q8shh4.jpg",
+      caseStudy:
+        " Planned, managed, and executed the JCI Aso Presidential Campaign for Felix Akinyemi, which culminated in a successful election victory and his emergence as President. The campaign strategy combined effective planning, stakeholder engagement, and impactful execution, ensuring strong visibility and support throughout the process.",
     },
     {
       icon: FaUsers,
@@ -40,7 +42,9 @@ export default function ServicesPage() {
         "Sustainability",
         "Knowledge sharing & collaboration",
       ],
-      caseStudy: "Case Study: [Details to be provided]",
+      img: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1755856245/capacity_zmuvda.jpg",
+      caseStudy:
+        "Conducted a Data Analysis training program for staff of the Nigerian Ports Authority, enhancing their ability to efficiently manage and interpret data. The training strengthened participants’ analytical skills and improved overall workplace capacity, enabling them to make more informed and data-driven decisions.",
     },
     {
       icon: FaLightbulb,
@@ -54,7 +58,9 @@ export default function ServicesPage() {
         "Problem solving & innovation",
         "Performance improvement",
       ],
-      caseStudy: "Case Study: [Details to be provided]",
+      img: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1755856263/consult_cqtrqo.png",
+      caseStudy:
+        "Successfully consulted for Crown Agrovet Limited providing expert guidance on website development, social media enhancement, and business development strategies. The intervention led to thriving business growth, enhanced brand visibility, and a significant boost in client interactions and audience engagement.",
     },
     {
       icon: FaCalendarAlt,
@@ -68,7 +74,9 @@ export default function ServicesPage() {
         "Audience engagement",
         "Seamless execution & evaluation",
       ],
-      caseStudy: "Case Study: [Details to be provided]",
+      img: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1755856250/eventhost_df9ixt.jpg",
+      caseStudy:
+        "Successfully hosted and curated the official report for the 13th BABA 'N' YARA Novelty Games, organized by Junior Chamber International (JCI), Aso, helping foster sportsmanship, enhanced marketing visibility, and created valuable networking opportunities while ensuring a memorable experience for attendees across the city",
     },
     {
       icon: FaHeart,
@@ -82,7 +90,9 @@ export default function ServicesPage() {
         "Sustainability",
         "Social inclusion",
       ],
-      caseStudy: "Case Study: [Details to be provided]",
+      img: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1755856245/commdev_mquwyb.jpg",
+      caseStudy:
+        "Successfully hosted the 3rd edition of our Business Development Series, where we trained over 30 participants on the art of business pitching. The program equipped them with practical strategies to present their businesses compellingly—capturing client interest, building confidence, and ultimately increasing their chances of securing contracts.",
     },
     {
       icon: FaFileAlt,
@@ -96,7 +106,9 @@ export default function ServicesPage() {
         "Quality & consistency",
         "Multi-platform adaptability",
       ],
-      caseStudy: "Case Study: [Details to be provided]",
+      img: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1755856246/contentdev_umsxtx.jpg",
+      caseStudy:
+        "Developed a comprehensive report for the Mswitch Creative Academy for Post-Production, thoroughly documenting every detail and highlight—from the Audio Masterclass Cohort 1 training sessions to the Demo-Day graduation. This helped our client preserve the full experience, creating a resource that both captures the event’s impact and allows stakeholders to relive the moments.",
     },
     {
       icon: FaCode,
@@ -110,7 +122,9 @@ export default function ServicesPage() {
         "Scalable architecture",
         "SEO & integration capabilities",
       ],
-      caseStudy: "Case Study: [Details to be provided]",
+      img: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1755856254/webdev_n6nwvl.png",
+      caseStudy:
+        "Designed and developed a user-friendly website for Brandbuild.ng, creating an engaging platform that effectively showcases their creative services. The revamped site not only enhanced brand presentation but also boosted client interaction and audience engagement.",
     },
     {
       icon: FaUserCheck,
@@ -124,7 +138,9 @@ export default function ServicesPage() {
         "Performance management",
         "Employee growth & retention",
       ],
-      caseStudy: "Case Study: [Details to be provided]",
+      img: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1755856249/recruitment_pqu1t7.jpg",
+      caseStudy:
+        "Successfully recruited a qualified and skilled Social Media Manager for GAI Academy through a structured process that included careful applicant sourcing, thorough résumé reviews, and detailed interview assessments. This ensured the placement of a candidate well-suited to drive the Academy’s digital presence and engagement.",
     },
     {
       icon: FaPalette,
@@ -138,7 +154,9 @@ export default function ServicesPage() {
         "Strategic messaging",
         "Audience connection",
       ],
-      caseStudy: "Case Study: [Details to be provided]",
+      img: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1755856246/branding_ncgdlw.png",
+      caseStudy:
+        "Provided comprehensive branding and design services for Rheenadive, including the creation of a logo, letterhead, business card, and invoice templates. The project successfully brought the brand to life by delivering a cohesive visual identity that clearly represents its values, essence, and corporate identity. This strengthened Rheenadive’s professional image and improved brand consistency across all touchpoints.",
     },
   ];
 
@@ -215,7 +233,7 @@ export default function ServicesPage() {
                       </h4>
                       <p className="text-gray-600 mb-6">{service.caseStudy}</p>
                       <img
-                        src={`/placeholder.svg?height=300&width=500&query=${service.title.toLowerCase()} case study`}
+                        src={service.img}
                         alt={`${service.title} case study`}
                         className="w-full h-48 object-cover rounded-lg"
                       />
