@@ -22,7 +22,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed w-full bg-white  z-0 md:bg-opacity -90 py-4 transition duration-300 ease-in-out border-b ${
+      className={`fixed w-full bg-white  z-100 md:bg-opacity-100 py-4 transition duration-300 ease-in-out border-b ${
         !top ? "bg-white backdrop-blur-sm shadow-lg" : ""
       }`}
     >
@@ -39,7 +39,7 @@ export default function Header() {
             <ul className="flex grow justify-end flex-wrap items-center">
               <li>
                 <Link
-                  href="/#about"
+                  href="/about"
                   className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out"
                 >
                   About us
