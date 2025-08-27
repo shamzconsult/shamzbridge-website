@@ -12,7 +12,27 @@ export default function AddNewJobForm() {
   const [mode, setMode] = useState("");
   const [closing, setClosing] = useState("");
   const [location, setLocation] = useState("");
+  const [requirements, setRequirements] = useState([""]);
+  const [description, setDescription] = useState("");
   const router = useRouter();
+
+  const addRequirement = () => {
+    setRequirements([...requirements, ""]);
+  };
+
+  const removeRequirement = (index: number) => {
+    if (requirements.length <= 1) return;
+    const newRequirements = [...requirements];
+    newRequirements.splice(index, 1);
+    setRequirements(newRequirements);
+  };
+
+  const updateRequirement = (index: number, value: string) => {
+    const newRequirements = [...requirements];
+    newRequirements[index] = value;
+    setRequirements(newRequirements);
+  };
+
 
 
   const handleSubmit = async (e: any) => {
@@ -21,6 +41,8 @@ export default function AddNewJobForm() {
     if (!type || !title || !formId || !mode || (mode !== "Remote" && !location) || !closing) {
       return;
     }
+
+    const filteredRequirements = requirements.filter(req => req.trim() !== "");
 
     try {
       const res = await fetch("/api/career", {
@@ -35,6 +57,8 @@ export default function AddNewJobForm() {
           mode,
           closing,
           location: mode === "Remote" ? "" : location,
+          requirements: filteredRequirements,
+          description,
         }),
       });
       if (res.ok) {
@@ -129,16 +153,62 @@ export default function AddNewJobForm() {
       )}
 
       <div className='flex flex-col gap-1 text-sm font-medium capitalize'>
-        <label>Deadline</label>
-          <input 
-            onChange={(e) => setClosing(e.target.value)}
-            value={closing}
-            type="text"
-            placeholder="Job deadline"
-            className='rounded-md border bg-white border-slate-200 w-full p-2 outline-none placeholder:opacity-50'
-            required
-            />
+        <label>Description </label>
+        <input 
+          onChange={(e) => setDescription(e.target.value)}
+          value={description}
+          type="text"
+          placeholder="Job Description"
+          className="rounded-md border bg-white border-slate-200 w-full p-2 outline-none placeholder:opacity-50" />
       </div>
+
+      <div className='flex flex-col gap-1 text-sm font-medium capitalize'>
+        <div className="flex justify-between items-center">
+          <label>Requirements</label>
+          <button
+            type="button"
+            onClick={addRequirement}
+            className="text-xs bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
+          >
+            Add Requirement
+          </button>
+        </div>
+        
+        {requirements.map((requirement, index) => (
+          <div key={index} className="flex items-center gap-2 mb-2">
+            <input
+              onChange={(e) => updateRequirement(index, e.target.value)}
+              value={requirement}
+              type="text"
+              placeholder={`Requirement ${index + 1}`}
+              className='flex-1 rounded-md border bg-white border-slate-200 p-2 outline-none placeholder:opacity-50'
+            />
+            <button
+              type="button"
+              onClick={() => removeRequirement(index)}
+              className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600 text-xs"
+              disabled={requirements.length <= 1}
+            >
+              Remove
+            </button>
+          </div>
+        ))}
+      </div>
+
+
+      <div className='flex flex-col gap-1 text-sm font-medium capitalize'>
+        <label>Deadline</label>
+        <input 
+          onChange={(e) => setClosing(e.target.value)}
+          value={closing}
+          type="text"
+          placeholder="Job deadline"
+          className='rounded-md border bg-white border-slate-200 w-full p-2 outline-none placeholder:opacity-50'
+          required
+        />
+      </div>
+
+      
 
       <button
         type='submit'

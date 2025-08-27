@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 const POST = async (request: any) => {
   try {
-    const { title, type, mode, location, formId, closing } = await request.json();
+    const { title, type, mode, location, formId, closing, requirements, description } = await request.json();
     await connectMongoDB();
 
     if (!title || !type || !mode || (mode !== "Remote" && !location) || !formId || !closing) {
@@ -21,11 +21,13 @@ const POST = async (request: any) => {
       mode,
       location,
       closing,
-      isDeleted: false
+      isDeleted: false,
+      requirements: requirements || [],
+      description,
     });
 
     return NextResponse.json(
-      { message: "New job details added successfully" },
+      { message: "New job details added successfully", result },
       { status: 201 }
     );
   } catch (error) {
