@@ -26,9 +26,20 @@ export default async function HiringAdvert() {
 
   return (
     <>
+      {/* Hero Section */}
+      <section className="pt-24 pb-16 bg-gradient-to-br from-orange-600 via-orange-400 to-orange-500 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="font-serif text-5xl font-bold mb-6">Join Our Team</h1>
+          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+            Be part of a mission-driven organization that creates lasting
+            positive impact in communities worldwide. Build your career while
+            building a better future.
+          </p>
+        </div>
+      </section>
       <section className="min-h-screen max-w-6xl mx-auto px-4 sm:px-6 mb-8">
-         <div className="mt-1 text-center mb-8 sm:mb-0 sm:text-right">
-          <ContactButton /> 
+        <div className="mt-1 text-center mb-8 sm:mb-0 sm:text-right">
+          <ContactButton />
         </div>
 
         <div>

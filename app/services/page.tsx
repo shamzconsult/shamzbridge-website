@@ -164,7 +164,7 @@ export default function ServicesPage() {
     <>
       <div className="min-h-screen">
         {/* Hero Section */}
-        <section className="pt-24 pb-16 mt-[80px] bg-gradient-to-br from-blue-900 to-teal-700 text-white">
+        <section className="pt-24 pb-16 mt-[80px] bg-gradient-to-br from-orange-600 via-orange-400 to-orange-500 text-white">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className=" text-3xl md:text-5xl font-bold mb-6">
               Our Services
@@ -248,12 +248,22 @@ export default function ServicesPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-blue-900 text-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className=" text-2xl md:text-4xl font-bold mb-6">
+        <section className="relative min-h-[60vh] flex items-center justify-center">
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: "url('/bg1.jpg')",
+            }}
+          />
+          {/* Dark overlay for better text readability */}
+          <div className="absolute inset-0 bg-black/70" />
+
+          {/* Content */}
+          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+            <h2 className="text-2xl md:text-4xl font-bold mb-6">
               Ready to Get Started?
             </h2>
-            <p className="text-xl text-blue-100 mb-8">
+            <p className="text-xl mb-8 opacity-90">
               Let&apos;s discuss how our services can help you achieve your
               goals and create lasting impact.
             </p>
@@ -261,8 +271,8 @@ export default function ServicesPage() {
               <a
                 href="mailto:shamzbridgeconsult@gmail.com?subject=Contacting%20you%20about%20hiring%20service%20with%20Shamzbridge&body=Hi, %0D%0A%0D%0A"
                 target="_blank"
-                rel="noopener"
-                className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-md font-medium text-lg transition-colors duration-200"
+                rel="noreferrer noopener"
+                className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-md font-medium text-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
               >
                 Schedule a Consultation
               </a>
