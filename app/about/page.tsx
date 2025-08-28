@@ -72,7 +72,7 @@ export default function AboutPage() {
 
       {/* Hero Section */}
 
-      <section className="pt-24 pb-16 mt-[80px] bg-gradient-to-br from-blue-900 to-teal-700 text-white">
+      <section className="pt-24 pb-16 mt-[80px] bg-gradient-to-br from-orange-600 via-orange-400 to-orange-500 text-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className=" text-3xl md:text-5xl font-bold mb-6">About Us</h1>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto">

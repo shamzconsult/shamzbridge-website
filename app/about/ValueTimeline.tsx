@@ -15,8 +15,16 @@ interface ValuesTimelineProps {
 
 export function ValueTimeline({ values, className }: ValuesTimelineProps) {
   return (
-    <section className="py-20 bg-blue-900 text-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      className="py-20 relative bg-cover bg-center bg-no-repeat text-white"
+      style={{
+        backgroundImage: "url('/about.jpg')",
+      }}
+    >
+      {/* Background overlay for better text readability */}
+      <div className="absolute inset-0 bg-[#1e1e1e]/80 backdrop-blur-[1px]" />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className=" text-2xl md:text-4xl font-bold mb-4">
             Our Values Journey
@@ -29,7 +37,7 @@ export function ValueTimeline({ values, className }: ValuesTimelineProps) {
 
         <div className={`relative max-w-4xl mx-auto ${className || ""}`}>
           {/* Timeline line */}
-          <div className="absolute left-8 md:left-1/2 md:-translate-x-0.5 top-0 h-full w-0.5 bg-blue-300/30" />
+          <div className="absolute left-8 md:left-1/2 md:-translate-x-0.5 top-0 h-full w-0.5 bg-orange-600" />
 
           {values.map((value, index) => (
             <div
@@ -39,8 +47,8 @@ export function ValueTimeline({ values, className }: ValuesTimelineProps) {
               }`}
             >
               {/* Timeline dot with icon */}
-              <div className="relative z-10 hidden md:flex h-16 w-16 items-center justify-center rounded-full bg-orange-600 border-4 border-blue-900 shadow-lg md:absolute md:left-1/2 md:-translate-x-1/2">
-                <value.icon className="h-8 w-8 text-blue-900" />
+              <div className="relative z-10 hidden md:flex h-16 w-16 items-center justify-center rounded-full bg-orange-600 border-4  shadow-lg md:absolute md:left-1/2 md:-translate-x-1/2">
+                <value.icon className="h-8 w-8 text-white" />
               </div>
 
               {/* Content card */}
@@ -49,7 +57,7 @@ export function ValueTimeline({ values, className }: ValuesTimelineProps) {
                   index % 2 === 0 ? "md:pr-8" : "md:pl-8"
                 }`}
               >
-                <div className="bg-white/10 border border-blue-300/20 backdrop-blur-sm rounded-lg p-6">
+                <div className="bg-white/10 border border-white backdrop-blur-sm rounded-lg p-6">
                   <div>
                     {value.step && (
                       <div className="text-amber-400 font-semibold text-sm mb-2">
