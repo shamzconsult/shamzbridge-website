@@ -1,8 +1,11 @@
+"use client"
+
 import { getAllJob } from "@/app/services/careerService";
 import Footer from "./ui/footer";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import ContactButton from "./ContactButton";
+import { useEffect, useState } from "react"; 
 
 dayjs.extend(relativeTime);
 
@@ -17,26 +20,101 @@ export type JobType = {
   formId: string;
   createdAt: string;
   requirements: string[];
+  description: string;
 };
 
-export default async function HiringAdvert() {
-  const data = await getAllJob();
-  const jobs: JobType[] = data.jobs || [];
-  const totalJobs = jobs?.length;
+const floaterPositions = [
+  // Left side floaters
+  { top: "15%", left: "10%", size: "w-16 h-16", animation: "animate-bounce", delay: "delay-1000" },
+  { top: "35%", left: "15%", size: "w-12 h-12", animation: "animate-pulse", delay: "delay-1500" },
+  { top: "55%", left: "5%", size: "w-14 h-14", animation: "animate-bounce", delay: "delay-2000" },
+  { top: "75%", left: "12%", size: "w-10 h-10", animation: "animate-pulse", delay: "delay-500" },
+  
+  // Right side floaters
+  { top: "15%", right: "10%", size: "w-16 h-16", animation: "animate-bounce", delay: "delay-1000" },
+  { top: "35%", right: "15%", size: "w-12 h-12", animation: "animate-pulse", delay: "delay-1500" },
+  { top: "55%", right: "5%", size: "w-14 h-14", animation: "animate-bounce", delay: "delay-2000" },
+  { top: "75%", right: "12%", size: "w-10 h-10", animation: "animate-pulse", delay: "delay-500" },
+  
+  // Center floaters
+  { top: "25%", left: "45%", size: "w-8 h-8", animation: "animate-pulse", delay: "delay-700" },
+  { top: "65%", left: "48%", size: "w-10 h-10", animation: "animate-bounce", delay: "delay-1200" },
+];
+
+
+export default function HiringAdvert() {
+  const [isVisible, setIsVisible] = useState(false);
+  const [jobs, setJobs] = useState<JobType[]>([]);
+  const [totalJobs, setTotalJobs] = useState(0);
+
+  useEffect(() => {
+    // Fetch jobs data
+    const fetchData = async () => {
+      try {
+        const data = await getAllJob();
+        setJobs(data.jobs || []);
+        setTotalJobs(data.jobs?.length || 0);
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+      }
+    };
+
+    fetchData();
+    
+    setIsVisible(true);
+  }, []);
+
+  console.log(jobs)
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="pt-24 pb-16 bg-gradient-to-br from-orange-600 via-orange-400 to-orange-500 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-serif text-5xl font-bold mb-6">Join Our Team</h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-            Be part of a mission-driven organization that creates lasting
-            positive impact in communities worldwide. Build your career while
-            building a better future.
-          </p>
+      <div className="relative  overflow-hidden">
+        <div className="flex h-[400px]">
+          <div className={`w-1/2 bg-orange-400 transition-all duration-1000 ease-out ${isVisible ? 'translate-x-0' : '-translate-x-full'}`}></div>
+          <div className={`w-1/2 bg-orange-400 transition-all duration-1000 ease-out ${isVisible ? 'translate-x-0' : 'translate-x-full'}`}></div>
         </div>
-      </section>
+        
+        {/* gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/30 to-transparent"></div>
+
+         {floaterPositions.map((floater, index) => (
+          <div
+            key={index}
+            className={`absolute bg-white/10 rounded-full ${floater.size} ${floater.animation} ${floater.delay}`}
+            style={{
+              top: floater.top,
+              left: floater.left || undefined,
+              right: floater.right || undefined,
+            }}
+          ></div>
+        ))}
+        
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+            <h1 className={`font-serif text-3xl md:text-5xl  font-bold mb-6 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              Join Our Team
+            </h1>
+            <p className={`md:text-xl text-orange-100 max-w-3xl mx-auto mb-10 transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              Be part of a mission-driven organization that creates lasting
+              positive impact in communities worldwide. Build your career while
+              building a better future.
+            </p>
+           
+          </div>
+        </div>
+        
+        
+        <style jsx>{`
+          @keyframes scroll {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(5px); opacity: 0.5; }
+          }
+          .animate-scroll {
+            animation: scroll 2s infinite;
+          }
+        `}</style>
+      </div>
+
       <section className="min-h-screen max-w-6xl mx-auto px-4 sm:px-6 mb-8">
         {/* <div className="mt-1 text-center mb-8 sm:mb-0 sm:text-right">
           <ContactButton />
@@ -59,6 +137,7 @@ export default async function HiringAdvert() {
                   closing,
                   formId,
                   createdAt,
+                  description = "",
                   requirements,
                 }) => (
                   <div
@@ -90,6 +169,13 @@ export default async function HiringAdvert() {
                           <time>Posted:</time>
                           <time>{dayjs(createdAt).fromNow()}</time>
                         </div>
+                        {description && description.trim() !== "" && (
+                          <div className="mb-4">
+                            <h4 className="font-medium text-slate-700 text-sm mb-2">Description:</h4>
+                            <p className="text-sm text-slate-600">{description}</p>
+                          </div>
+                        )}
+                        
                         {requirements.length > 0 ? (
                           <div className="flex flex-col gap-2">
                             <h4 className="font-medium text-slate-700 text-sm">
