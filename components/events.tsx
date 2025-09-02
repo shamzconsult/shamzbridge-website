@@ -79,7 +79,7 @@ const Events = () => {
       ) : (
         <div className="min-h-screen">
           {/* Hero Section */}
-          <section className="relative pt-24 pb-16 -mt-[60px] bg-gradient-to-br from-orange-600 via-orange-400 to-orange-500 text-white min-h-[70vh] flex items-center justify-center overflow-hidden">
+          <section className="relative  bg-gradient-to-br from-orange-600 via-orange-400 to-orange-500 text-white min-h-[70vh] flex items-center justify-center overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/20"></div>
             <div className="absolute inset-0 bg-black/20"></div>
 

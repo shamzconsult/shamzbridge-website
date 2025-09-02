@@ -2,9 +2,12 @@ import Hiring from "@/app/models/hiring";
 import connectMongoDB from "@/libs/mongodb";
 import { NextResponse } from "next/server";
 
-const GET = async (request: any, { params }: { params: { _id: string } }) => {
+const GET = async (
+  request: any,
+  { params }: { params: Promise<{ _id: string }> }
+) => {
   try {
-    const id = params._id;
+    const { _id: id } = await params;
     await connectMongoDB();
     const job = await Hiring.findOne({ _id: id, isDeleted: { $ne: true } });
     if (!job) {
@@ -19,9 +22,12 @@ const GET = async (request: any, { params }: { params: { _id: string } }) => {
   }
 };
 
-const PUT = async (request: any, { params }: { params: { _id: string } }) => {
+const PUT = async (
+  request: any,
+  { params }: { params: Promise<{ _id: string }> }
+) => {
   try {
-    const id = params._id;
+    const { _id: id } = await params;
 
     const {
       newTitle: title,
@@ -33,9 +39,17 @@ const PUT = async (request: any, { params }: { params: { _id: string } }) => {
 
     await connectMongoDB();
 
-    const updatedJob = await Hiring.findByIdAndUpdate(id, {
-      title, type, mode, location, isActive
-    }, { new: true });
+    const updatedJob = await Hiring.findByIdAndUpdate(
+      id,
+      {
+        title,
+        type,
+        mode,
+        location,
+        isActive,
+      },
+      { new: true }
+    );
 
     return NextResponse.json(
       { message: "job post updated successfully!!", job: updatedJob },
@@ -51,13 +65,14 @@ const PUT = async (request: any, { params }: { params: { _id: string } }) => {
 
 const DELETE = async (
   request: any,
-  { params }: { params: { _id: string } }
+  { params }: { params: Promise<{ _id: string }> }
 ) => {
   try {
+    const { _id } = await params;
     await connectMongoDB();
 
     const closeJobOpening = await Hiring.findByIdAndUpdate(
-      params._id,
+      _id,
       { isDeleted: true },
       { new: true }
     );
@@ -81,16 +96,19 @@ const DELETE = async (
   }
 };
 
-const PATCH = async (request: any, { params }: { params: { _id: string } }) => {
+const PATCH = async (
+  request: any,
+  { params }: { params: Promise<{ _id: string }> }
+) => {
   try {
-    const id = params._id;
-    const { isActive } = await request.json(); 
+    const { _id: id } = await params;
+    const { isActive } = await request.json();
     await connectMongoDB();
 
     const updatedJob = await Hiring.findByIdAndUpdate(
       id,
       { isActive },
-      { new: true } 
+      { new: true }
     );
 
     if (!updatedJob) {
@@ -108,6 +126,5 @@ const PATCH = async (request: any, { params }: { params: { _id: string } }) => {
     );
   }
 };
-
 
 export { GET, PUT, DELETE, PATCH };

@@ -2,9 +2,12 @@ import UpcomingEvent from "@/app/models/upcoming-event";
 import connectMongoDB from "@/libs/mongodb";
 import { NextResponse } from "next/server";
 
-const GET = async (request: any, { params }: { params: { _id: string } }) => {
+const GET = async (
+  request: any,
+  { params }: { params: Promise<{ _id: string }> }
+) => {
   try {
-    const id = params._id;
+    const { _id: id } = await params;
     await connectMongoDB();
     const event = await UpcomingEvent.findOne({ _id: id });
     if (!event) {
@@ -22,9 +25,12 @@ const GET = async (request: any, { params }: { params: { _id: string } }) => {
   }
 };
 
-const PUT = async (request: any, { params }: { params: { _id: string } }) => {
+const PUT = async (
+  request: any,
+  { params }: { params: Promise<{ _id: string }> }
+) => {
   try {
-    const id = params._id;
+    const { _id: id } = await params;
     const {
       newImage: image,
       newTitle: title,
@@ -56,12 +62,13 @@ const PUT = async (request: any, { params }: { params: { _id: string } }) => {
 
 const DELETE = async (
   request: any,
-  { params }: { params: { _id: string } }
+  { params }: { params: Promise<{ _id: string }> }
 ) => {
   try {
+    const { _id } = await params;
     await connectMongoDB();
     const dataToDelete = await UpcomingEvent.findByIdAndUpdate(
-      params._id,
+      _id,
       { isActive: false },
       { new: true }
     );

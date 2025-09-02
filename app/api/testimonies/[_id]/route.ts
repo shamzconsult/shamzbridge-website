@@ -2,9 +2,12 @@ import Testimonials from "@/app/models/testimonies";
 import connectMongoDB from "@/libs/mongodb";
 import { NextResponse } from "next/server";
 
-const GET = async (request: any, { params }: { params: { _id: string } }) => {
+const GET = async (
+  request: any,
+  { params }: { params: Promise<{ _id: string }> }
+) => {
   try {
-    const id = params._id;
+    const { _id: id } = await params; // Added await for params
     await connectMongoDB();
     const testimony = await Testimonials.findOne({ _id: id });
     if (!testimony) {
@@ -22,9 +25,12 @@ const GET = async (request: any, { params }: { params: { _id: string } }) => {
   }
 };
 
-const PUT = async (request: any, { params }: { params: { _id: string } }) => {
+const PUT = async (
+  request: any,
+  { params }: { params: Promise<{ _id: string }> }
+) => {
   try {
-    const id = params._id;
+    const { _id: id } = await params; // Added await for params
 
     const {
       newImage: image,
@@ -55,12 +61,13 @@ const PUT = async (request: any, { params }: { params: { _id: string } }) => {
 
 const DELETE = async (
   request: any,
-  { params }: { params: { _id: string } }
+  { params }: { params: Promise<{ _id: string }> }
 ) => {
   try {
     await connectMongoDB();
+    const { _id } = await params; // Added await for params
     const testimonyToDelete = await Testimonials.findByIdAndUpdate(
-      params._id,
+      _id,
       { isActive: false },
       { new: true }
     );
