@@ -6,7 +6,7 @@ export default async function Hiring() {
   const data = await getAllJob();
   const jobs: JobType[] = data.jobs || [];
   return (
-    <div className="mt-[80px]">
+    <div className="">
       <section>
         {jobs.map((job) => (
           <JobStructuredData key={job._id} job={job} />

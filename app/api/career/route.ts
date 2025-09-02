@@ -4,10 +4,26 @@ import { NextResponse } from "next/server";
 
 const POST = async (request: any) => {
   try {
-    const { title, type, mode, location, formId, closing, requirements, description } = await request.json();
+    const {
+      title,
+      type,
+      mode,
+      location,
+      formId,
+      closing,
+      requirements,
+      description,
+    } = await request.json();
     await connectMongoDB();
 
-    if (!title || !type || !mode || (mode !== "Remote" && !location) || !formId || !closing) {
+    if (
+      !title ||
+      !type ||
+      !mode ||
+      (mode !== "Remote" && !location) ||
+      !formId ||
+      !closing
+    ) {
       return NextResponse.json(
         { message: "Missing required fields" },
         { status: 400 }
@@ -23,7 +39,7 @@ const POST = async (request: any) => {
       closing,
       isDeleted: false,
       requirements: requirements || [],
-      description,
+      description: description || "",
     });
 
     return NextResponse.json(
@@ -42,9 +58,13 @@ const POST = async (request: any) => {
 const GET = async () => {
   try {
     await connectMongoDB();
-    const jobs = await Hiring.find({ isDeleted: { $ne: true } })
-      .sort({ createdAt: -1 });  
-      return NextResponse.json({ jobs });
+    const jobs = await Hiring.find({ isDeleted: { $ne: true } }).sort({
+      createdAt: -1,
+    });
+
+    // console.log("Found jobs:", jobs);
+    // console.log("Number of jobs:", jobs.length);
+    return NextResponse.json({ jobs });
   } catch (error) {
     console.error("Error fetching jobs:", error);
     return NextResponse.json(
