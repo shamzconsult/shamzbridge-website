@@ -6,7 +6,7 @@ import Slider from "@/components/carousel/slider";
 import AboutUs from "@/components/about";
 import Partners from "@/components/partners";
 import UpcomingEvent from "@/components/upcoming-event";
-import WhyChooseUs from "@/components/why-choose-us";
+import WhyChooseUs from "@/components/Why-choose-us";
 import ImpactStats from "@/components/Impact";
 export default function Home() {
   return (
