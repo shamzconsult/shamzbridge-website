@@ -49,13 +49,10 @@ export default function Partners() {
             className='max-w-3xl mx-auto text-center pb-12 md:pb-16'
           >
             <h2 className='h2 mb-4 text-orange-600'>
-              Organizations who trust us
+              Our Trusted Partners
             </h2>
             <p className='text-xl text-gray-600' data-aos='zoom-y-out'>
-              Discover the Diverse Range of Organizations Who Trust Us for
-              Unmatched Excellence. From global enterprises to local businesses,
-              our commitment to delivering exceptional service has earned us the
-              trust of clients across various industries.
+              We're proud to collaborate with leading organizations that share our commitment to positive impact and sustainable development.
             </p>
           </div>
 
@@ -70,7 +67,7 @@ export default function Partners() {
             <TestimonySlider />
           </div>
         </div>
-        <Newsletter />
+        {/* <Newsletter /> */}
       </div>
     </section>
   );
