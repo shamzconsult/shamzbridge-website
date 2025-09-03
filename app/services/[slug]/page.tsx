@@ -5,13 +5,6 @@ import { Badge } from "@/components/ui/badge"
 import { Target, Users, MessageSquare, Calendar, Heart, FileText, Code, ArrowLeft, CheckCircle } from "lucide-react"
 import Link from "next/link"
 
-type ServicePageProps = {
-  params: {
-    slug: string;
-  };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
 const serviceData = {
   "programs-projects-management": {
     icon: Target,
@@ -219,8 +212,14 @@ const serviceData = {
   },
 }
 
-export default function ServicePage({ params }: ServicePageProps) {
-  const service = serviceData[params.slug as keyof typeof serviceData]
+export default async function ServicePage({ 
+  params 
+}: { 
+  params: Promise<{ slug: string }> 
+}) {
+  // Await the params promise
+  const resolvedParams = await params
+  const service = serviceData[resolvedParams.slug as keyof typeof serviceData]
 
   if (!service) {
     notFound()
@@ -230,6 +229,16 @@ export default function ServicePage({ params }: ServicePageProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white">
+      {/* <div className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <Link href="/" className="inline-flex items-center text-orange-600 hover:text-orange-700 transition-colors">
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Home
+          </Link>
+        </div>
+      </div> */}
+
+      {/* Hero Section */}
       <section className="py-20 bg-gradient-to-r from-orange-600 to-orange-700 text-white mt-[7%]" >
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-center mb-8">
@@ -246,9 +255,11 @@ export default function ServicePage({ params }: ServicePageProps) {
         </div>
       </section>
 
+      {/* Main Content */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            {/* Features */}
             <Card className="lg:col-span-1">
               <CardHeader>
                 <CardTitle className="text-2xl text-slate-900 flex items-center">
@@ -268,6 +279,7 @@ export default function ServicePage({ params }: ServicePageProps) {
               </CardContent>
             </Card>
 
+            {/* Benefits */}
             <Card className="lg:col-span-1">
               <CardHeader>
                 <CardTitle className="text-2xl text-slate-900 flex items-center">
@@ -287,6 +299,7 @@ export default function ServicePage({ params }: ServicePageProps) {
               </CardContent>
             </Card>
 
+            {/* Process */}
             <Card className="lg:col-span-1">
               <CardHeader>
                 <CardTitle className="text-2xl text-slate-900 flex items-center">
@@ -309,6 +322,7 @@ export default function ServicePage({ params }: ServicePageProps) {
             </Card>
           </div>
 
+          {/* CTA Section */}
           <div className="mt-20 text-center">
             <Card className="bg-gradient-to-r from-orange-50 to-orange-100 border-orange-200">
               <CardContent className="py-12">

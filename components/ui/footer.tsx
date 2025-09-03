@@ -1,3 +1,4 @@
+"use client";
 import { InstagramLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import { FaFacebook, FaMailBulk , FaPhone} from "react-icons/fa";
 import Newsletter from "../newsletter"
