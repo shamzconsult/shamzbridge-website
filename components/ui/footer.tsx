@@ -222,7 +222,7 @@ export default function Footer() {
           </div>
 
           <div className="border-t border-orange-600 mt-8 pt-8 text-center">
-            <p className="">© 2024 Corporate Solutions. All rights reserved.</p>
+            <p>@ {new Date().getFullYear()} <span>Corporate Solutions. All rights reserved.</span></p>
           </div>
         </div>
       </div>
