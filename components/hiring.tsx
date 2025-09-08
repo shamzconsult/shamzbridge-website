@@ -319,7 +319,7 @@ export default function HiringAdvert() {
         <div className="absolute inset-0 bg-black/70 bg-opacity-70 z-0"></div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
-          <h2 className="font-serif text-orange-500 text-4xl font-bold mb-6">
+          <h2 className="font-serif text-orange-500 text-2xl md:text-4xl font-bold mb-6">
             Recruitment Services
           </h2>
           <p className="text-xl text-blue-100 mb-6">

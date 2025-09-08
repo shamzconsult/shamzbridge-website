@@ -1,12 +1,28 @@
-import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 const stats = [
-  { number: "10+", label: "Successful Projects", description: "Completed across various sectors" },
-  { number: "2000+", label: "Individuals Trained", description: "Through our capacity building programs" },
-  { number: "20+", label: "Community Events", description: "With sustainable development initiatives" },
-  { number: "9+", label: "Events Managed", description: "Rate across all our services" },
-]
+  {
+    number: "15+",
+    label: "Successful Projects",
+    description: "Completed across various sectors",
+  },
+  {
+    number: "11000+",
+    label: "Individuals Trained",
+    description: "Through our capacity building programs",
+  },
+  {
+    number: "20+",
+    label: "Community Events",
+    description: "With sustainable development initiatives",
+  },
+  {
+    number: "20+",
+    label: "Events Managed",
+    description: "Rate across all our services",
+  },
+];
 
 export default function ImpactStats() {
   return (
@@ -19,20 +35,27 @@ export default function ImpactStats() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Our Impact in Numbers</h2>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+            Our Impact in Numbers
+          </h2>
           <p className="text-xl text-slate-200 max-w-3xl mx-auto">
-            Measurable results that demonstrate our commitment to creating positive change and driving sustainable
-            development.
+            Measurable results that demonstrate our commitment to creating
+            positive change and driving sustainable development.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {stats.map((stat, index) => (
-            <div key={index} className="text-center group hover:transform hover:scale-105 transition-all duration-300">
-              <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-teal-400 to-amber-400 bg-clip-text text-transparent mb-2">
+            <div
+              key={index}
+              className="text-center group hover:transform hover:scale-105 transition-all duration-300"
+            >
+              <div className="text-xl md:text-5xl font-bold bg-gradient-to-r from-teal-400 to-amber-400 bg-clip-text text-transparent mb-2">
                 {stat.number}
               </div>
-              <h3 className="text-xl font-semibold mb-2 group-hover:text-teal-300 transition-colors">{stat.label}</h3>
+              <h3 className="text-xl font-semibold mb-2 group-hover:text-teal-300 transition-colors">
+                {stat.label}
+              </h3>
               <p className="text-slate-300 text-sm">{stat.description}</p>
             </div>
           ))}
@@ -49,5 +72,5 @@ export default function ImpactStats() {
         </div>
       </div>
     </section>
-  )
+  );
 }

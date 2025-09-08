@@ -131,9 +131,6 @@
 //   );
 // }
 
-
-
-
 // import React from 'react';
 // import { Target, Users, MessageSquare, Calendar, Heart, FileText, Code, ArrowRight } from "lucide-react";
 
@@ -221,9 +218,9 @@
 //     default: "bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500",
 //     ghost: "bg-transparent hover:bg-gray-100 text-gray-700"
 //   };
-  
+
 //   return (
-//     <button 
+//     <button
 //       className={`${baseClasses} ${variantClasses[variant]} ${className}`}
 //       onClick={onClick}
 //     >
@@ -280,27 +277,6 @@
 //     </section>
 //   );
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React from 'react';
 // import { Target, Users, MessageSquare, Calendar, Heart, FileText, Code, ArrowRight } from "lucide-react";
@@ -359,8 +335,6 @@
 //   },
 // ]
 
-
-
 // export default function Services() {
 //   return (
 //     <section className="py-20 bg-slate-50">
@@ -407,33 +381,25 @@
 //   );
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import React from 'react';
-import { Target, Users, MessageSquare, Calendar, Heart, FileText, Code, ArrowRight } from "lucide-react";
-import Link from 'next/link';
+import React from "react";
+import {
+  Target,
+  Users,
+  MessageSquare,
+  Calendar,
+  Heart,
+  FileText,
+  Code,
+  ArrowRight,
+} from "lucide-react";
+import Link from "next/link";
 
 const services = [
   {
     icon: Target,
     title: "Programs/Projects Management",
-    description: "Strategic planning and execution of complex projects with proven methodologies and expert oversight.",
+    description:
+      "Strategic planning and execution of complex projects with proven methodologies and expert oversight.",
     color: "text-orange-600",
     slug: "programs-projects-management",
   },
@@ -448,35 +414,40 @@ const services = [
   {
     icon: MessageSquare,
     title: "Consultancy Services",
-    description: "Expert advisory services tailored to your unique challenges and organizational goals.",
+    description:
+      "Expert advisory services tailored to your unique challenges and organizational goals.",
     color: "text-orange-700",
     slug: "consultancy-services",
   },
   {
     icon: Calendar,
     title: "Event Host/Management",
-    description: "Professional event planning and management services that create memorable and impactful experiences.",
+    description:
+      "Professional event planning and management services that create memorable and impactful experiences.",
     color: "text-orange-600",
     slug: "event-host-management",
   },
   {
     icon: Heart,
     title: "Community Development",
-    description: "Sustainable community-focused initiatives that drive positive social and economic change.",
+    description:
+      "Sustainable community-focused initiatives that drive positive social and economic change.",
     color: "text-orange-500",
     slug: "community-development",
   },
   {
     icon: FileText,
     title: "Content Development",
-    description: "High-quality content creation and strategy development for effective communication and engagement.",
+    description:
+      "High-quality content creation and strategy development for effective communication and engagement.",
     color: "text-orange-700",
     slug: "content-development",
   },
   {
     icon: Code,
     title: "Web Development",
-    description: "Modern, responsive web solutions that enhance your digital presence and user experience.",
+    description:
+      "Modern, responsive web solutions that enhance your digital presence and user experience.",
     color: "text-orange-600",
     slug: "web-development",
   },
@@ -487,10 +458,12 @@ export default function Services() {
     <section className="py-20 bg-slate-50" id="services">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Our Services</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">
+            Our Services
+          </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Comprehensive solutions designed to drive growth, build capacity, and create lasting impact in your
-            organization and community.
+            Comprehensive solutions designed to drive growth, build capacity,
+            and create lasting impact in your organization and community.
           </p>
         </div>
 
@@ -511,7 +484,9 @@ export default function Services() {
                   </h3>
                 </div>
                 <div className="px-6 pb-6 text-center">
-                  <p className="text-slate-600 mb-6 leading-relaxed">{service.description}</p>
+                  <p className="text-slate-600 mb-6 leading-relaxed">
+                    {service.description}
+                  </p>
                   <Link href={`/services/${service.slug}`}>
                     <button className="inline-flex items-center text-slate-700 hover:text-orange-500 font-semibold transition-all duration-300 px-4 py-2 rounded-md hover:bg-orange-50">
                       Learn More
