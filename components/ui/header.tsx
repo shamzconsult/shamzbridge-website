@@ -88,9 +88,7 @@ export default function Header() {
             exit={{ y: -100, opacity: 0 }}
             transition={{ duration: 0.7, ease: "easeInOut" }}
             className={`fixed top-0 left-0 w-full z-50  transition-all duration-300 ${
-              isScrolled
-                ? "bg-white text-gray-600 hover:text-gray-900 "
-                : "text-white hover:text-gray-300"
+              isScrolled ? "bg-white text-gray-600  " : "text-white "
             }`}
           >
             <div className="max-w-7xl mx-auto px-5 sm:px-0">
@@ -106,7 +104,7 @@ export default function Header() {
                       <li key={item.name}>
                         <Link
                           href={item.href}
-                          className="font-medium  px-5 py-3 flex items-center transition duration-300 ease-in-out"
+                          className="font-medium hover:opacity-80 px-5 py-3 flex items-center transition duration-300 ease-in-out"
                         >
                           {item.name}
                         </Link>
