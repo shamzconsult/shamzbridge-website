@@ -354,18 +354,9 @@ export default function ServicesPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="relative min-h-[60vh] flex items-center justify-center">
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: "url('/bg1.jpg')",
-            }}
-          />
-          {/* Dark overlay for better text readability */}
-          <div className="absolute inset-0 bg-black/70" />
-
+        <section className="min-h-[60vh] flex items-center justify-center bg-white">
           {/* Content */}
-          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600">
             <h2 className="text-2xl md:text-4xl font-bold mb-6">
               Ready to Get Started?
             </h2>
@@ -378,7 +369,7 @@ export default function ServicesPage() {
                 href="mailto:shamzbridgeconsult@gmail.com?subject=Contacting%20you%20about%20hiring%20service%20with%20Shamzbridge&body=Hi, %0D%0A%0D%0A"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-md font-medium text-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+                className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-2 rounded-md font-medium text-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
               >
                 Schedule a Consultation
               </a>

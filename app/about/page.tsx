@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Footer from "@/components/ui/footer";
 import {
   FaThLarge,
@@ -142,7 +142,7 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className=" text-2xl md:text-4xl font-bold text-orange-600 mb-6">
+              <h2 className=" text-3xl md:text-5xl font-bold text-orange-600 mb-6">
                 Our Story
               </h2>
               <p className="text-lg text-gray-600 mb-6">
@@ -184,7 +184,7 @@ export default function AboutPage() {
             <div className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
               <div className="p-8 text-center">
                 <FaThLarge className="h-16 w-16 text-purple-600 mx-auto mb-6" />
-                <h3 className=" text-xl md:text-3xl font-bold text-orange-600 mb-4">
+                <h3 className=" text-3xl md:text-4xl font-bold text-orange-600 mb-4">
                   Our Mission
                 </h3>
                 <p className="text-lg text-gray-600">
@@ -198,7 +198,7 @@ export default function AboutPage() {
             <div className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
               <div className="p-8 text-center">
                 <FaEye className="h-16 w-16 text-teal-600 mx-auto mb-6" />
-                <h3 className=" text-xl md:text-3xl font-bold text-orange-600 mb-4">
+                <h3 className=" text-3xl md:text-4xl font-bold text-orange-600 mb-4">
                   Our Vision
                 </h3>
                 <p className="text-lg text-gray-600">
@@ -217,7 +217,7 @@ export default function AboutPage() {
       <section className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className=" text-2xl md:text-4xl font-bold text-orange-600 mb-4">
+            <h2 className=" text-3xl md:text-4xl font-bold text-orange-600 mb-4">
               Meet our Board of Trustees
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">

@@ -183,7 +183,7 @@ const Events = () => {
           </section>
           <div className="flex flex-col justify-center items-center gap-20 text-gray-600 p-8">
             <section className="flex flex-col justify-center items-center gap-6">
-              <h1 className="font-bold text-lg">Upcoming Events</h1>
+              <h1 className="font-bold text-lg md:text-2xl">Upcoming Events</h1>
               <p>
                 Discover upcoming opportunities to gain insights, build
                 meaningful networks, and unlock growth.
@@ -257,7 +257,7 @@ const Events = () => {
               </div>
             </section>
             <section className="flex flex-col justify-center items-center gap-6">
-              <h1 className="font-bold text-lg">Past Events</h1>
+              <h1 className="font-bold text-lg md:text-2xl">Past Events</h1>
               <p>
                 Explore highlights from our past events and the positive change
                 they have created.
