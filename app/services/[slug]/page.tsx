@@ -1,15 +1,27 @@
-import { notFound } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Target, Users, MessageSquare, Calendar, Heart, FileText, Code, ArrowLeft, CheckCircle } from "lucide-react"
-import Link from "next/link"
+import { notFound } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Target,
+  Users,
+  MessageSquare,
+  Calendar,
+  Heart,
+  FileText,
+  Code,
+  ArrowLeft,
+  CheckCircle,
+} from "lucide-react";
+import Link from "next/link";
+import Footer from "@/components/ui/footer";
 
 const serviceData = {
   "programs-projects-management": {
     icon: Target,
     title: "Programs/Projects Management",
-    description: "Strategic planning and execution of complex projects with proven methodologies and expert oversight.",
+    description:
+      "Strategic planning and execution of complex projects with proven methodologies and expert oversight.",
     longDescription:
       "Our comprehensive project management services ensure your initiatives are delivered on time, within budget, and exceed expectations. We combine industry best practices with innovative approaches to drive successful outcomes.",
     features: [
@@ -68,7 +80,8 @@ const serviceData = {
   "consultancy-services": {
     icon: MessageSquare,
     title: "Consultancy Services",
-    description: "Expert advisory services tailored to your unique challenges and organizational goals.",
+    description:
+      "Expert advisory services tailored to your unique challenges and organizational goals.",
     longDescription:
       "Our experienced consultants provide strategic guidance and practical solutions to help organizations overcome challenges and achieve their objectives. We bring deep industry knowledge and proven methodologies to every engagement.",
     features: [
@@ -97,7 +110,8 @@ const serviceData = {
   "event-host-management": {
     icon: Calendar,
     title: "Event Host/Management",
-    description: "Professional event planning and management services that create memorable and impactful experiences.",
+    description:
+      "Professional event planning and management services that create memorable and impactful experiences.",
     longDescription:
       "From corporate conferences to community gatherings, we handle every aspect of event planning and execution. Our team ensures seamless experiences that engage audiences and achieve your event objectives.",
     features: [
@@ -126,7 +140,8 @@ const serviceData = {
   "community-development": {
     icon: Heart,
     title: "Community Development",
-    description: "Sustainable community-focused initiatives that drive positive social and economic change.",
+    description:
+      "Sustainable community-focused initiatives that drive positive social and economic change.",
     longDescription:
       "We work with communities to identify needs, develop solutions, and implement sustainable programs that create lasting positive impact. Our approach emphasizes local ownership and capacity building.",
     features: [
@@ -155,7 +170,8 @@ const serviceData = {
   "content-development": {
     icon: FileText,
     title: "Content Development",
-    description: "High-quality content creation and strategy development for effective communication and engagement.",
+    description:
+      "High-quality content creation and strategy development for effective communication and engagement.",
     longDescription:
       "Our content development services help organizations communicate effectively with their audiences through compelling, well-crafted content across multiple channels and formats.",
     features: [
@@ -184,7 +200,8 @@ const serviceData = {
   "web-development": {
     icon: Code,
     title: "Web Development",
-    description: "Modern, responsive web solutions that enhance your digital presence and user experience.",
+    description:
+      "Modern, responsive web solutions that enhance your digital presence and user experience.",
     longDescription:
       "We create custom web solutions that combine beautiful design with powerful functionality. Our development approach focuses on user experience, performance, and scalability.",
     features: [
@@ -210,146 +227,152 @@ const serviceData = {
       "Ongoing maintenance and support",
     ],
   },
-}
+};
 
-export default async function ServicePage({ 
-  params 
-}: { 
-  params: Promise<{ slug: string }> 
+export default async function ServicePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
 }) {
   // Await the params promise
-  const resolvedParams = await params
-  const service = serviceData[resolvedParams.slug as keyof typeof serviceData]
+  const resolvedParams = await params;
+  const service = serviceData[resolvedParams.slug as keyof typeof serviceData];
 
   if (!service) {
-    notFound()
+    notFound();
   }
 
-  const IconComponent = service.icon
+  const IconComponent = service.icon;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white">
-      {/* <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <Link href="/" className="inline-flex items-center text-orange-600 hover:text-orange-700 transition-colors">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Home
-          </Link>
-        </div>
-      </div> */}
-
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-r from-orange-600 to-orange-700 text-white mt-[7%]" >
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-center mb-8">
-            <div className="bg-white/20 p-6 rounded-full">
-              <IconComponent className="h-16 w-16" />
+    <>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white">
+        {/* Hero Section */}
+        <section className="py-20  bg-gradient-to-br from-orange-600 via-orange-400 to-orange-500 text-white ">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex items-center justify-center mb-8">
+              <div className="bg-white/20 p-6 rounded-full">
+                <IconComponent className="h-16 w-16" />
+              </div>
+            </div>
+            <div className="text-center">
+              <h1 className="text-3xl md:text-5xl font-bold mb-6">
+                {service.title}
+              </h1>
+              <p className="text-xl md:text-2xl text-orange-100 max-w-4xl mx-auto leading-relaxed">
+                {service.longDescription}
+              </p>
             </div>
           </div>
-          <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">{service.title}</h1>
-            <p className="text-xl md:text-2xl text-orange-100 max-w-4xl mx-auto leading-relaxed">
-              {service.longDescription}
-            </p>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Main Content */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Features */}
-            <Card className="lg:col-span-1">
-              <CardHeader>
-                <CardTitle className="text-2xl text-slate-900 flex items-center">
-                  <CheckCircle className="h-6 w-6 text-orange-600 mr-3" />
-                  Key Features
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3">
-                  {service.features.map((feature, index) => (
-                    <li key={index} className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-orange-600 mr-3 mt-0.5 flex-shrink-0" />
-                      <span className="text-slate-700">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+        {/* Main Content */}
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+              {/* Features */}
+              <Card className="lg:col-span-1">
+                <CardHeader>
+                  <CardTitle className="text-2xl text-slate-900 flex items-center">
+                    <CheckCircle className="h-6 w-6 text-orange-600 mr-3" />
+                    Key Features
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3">
+                    {service.features.map((feature, index) => (
+                      <li key={index} className="flex items-start">
+                        <CheckCircle className="h-5 w-5 text-orange-600 mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-slate-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
 
-            {/* Benefits */}
-            <Card className="lg:col-span-1">
-              <CardHeader>
-                <CardTitle className="text-2xl text-slate-900 flex items-center">
-                  <Target className="h-6 w-6 text-orange-600 mr-3" />
-                  Benefits
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3">
-                  {service.benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-start">
-                      <div className="w-2 h-2 bg-orange-600 rounded-full mr-3 mt-2 flex-shrink-0" />
-                      <span className="text-slate-700">{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+              {/* Benefits */}
+              <Card className="lg:col-span-1">
+                <CardHeader>
+                  <CardTitle className="text-2xl text-slate-900 flex items-center">
+                    <Target className="h-6 w-6 text-orange-600 mr-3" />
+                    Benefits
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3">
+                    {service.benefits.map((benefit, index) => (
+                      <li key={index} className="flex items-start">
+                        <div className="w-2 h-2 bg-orange-600 rounded-full mr-3 mt-2 flex-shrink-0" />
+                        <span className="text-slate-700">{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
 
-            {/* Process */}
-            <Card className="lg:col-span-1">
-              <CardHeader>
-                <CardTitle className="text-2xl text-slate-900 flex items-center">
-                  <Calendar className="h-6 w-6 text-orange-600 mr-3" />
-                  Our Process
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {service.process.map((step, index) => (
-                    <div key={index} className="flex items-start">
-                      <Badge variant="secondary" className="bg-orange-100 text-orange-700 mr-3 mt-0.5 flex-shrink-0">
-                        {index + 1}
-                      </Badge>
-                      <span className="text-slate-700">{step}</span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+              {/* Process */}
+              <Card className="lg:col-span-1">
+                <CardHeader>
+                  <CardTitle className="text-2xl text-slate-900 flex items-center">
+                    <Calendar className="h-6 w-6 text-orange-600 mr-3" />
+                    Our Process
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {service.process.map((step, index) => (
+                      <div key={index} className="flex items-start">
+                        <Badge
+                          variant="secondary"
+                          className="bg-orange-100 text-orange-700 mr-3 mt-0.5 flex-shrink-0"
+                        >
+                          {index + 1}
+                        </Badge>
+                        <span className="text-slate-700">{step}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
 
-          {/* CTA Section */}
-          <div className="mt-20 text-center">
-            <Card className="bg-gradient-to-r from-orange-50 to-orange-100 border-orange-200">
-              <CardContent className="py-12">
-                <h3 className="text-3xl font-bold text-slate-900 mb-4">Ready to Get Started?</h3>
-                <p className="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
-                  Let's discuss how our {service.title.toLowerCase()} services can help your organization achieve its
-                  goals.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" className="bg-orange-600 hover:bg-orange-700 text-white px-8">
-                    Contact Us Today
-                  </Button>
-                  <Link href="/#services">
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      className="border-orange-600 text-orange-600 hover:bg-orange-50 px-8 bg-transparent"
+            {/* CTA Section */}
+            <div className="mt-20 text-center">
+              <Card className="bg-gradient-to-r from-orange-50 to-orange-100 border-orange-200">
+                <CardContent className="py-12">
+                  <h3 className="text-3xl font-bold text-slate-900 mb-4">
+                    Ready to Get Started?
+                  </h3>
+                  <p className="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
+                    Let&apos;s discuss how our {service.title.toLowerCase()}{" "}
+                    services can help your organization achieve its goals.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a
+                      href="mailto:shamzbridgeconsult@gmail.com?subject=Contacting%20you%20about%20hiring%20service%20with%20Shamzbridge&body=Hi, %0D%0A%0D%0A"
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-2 rounded-md font-medium text-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
                     >
-                      View All Services
-                    </Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
+                      Contact Us Today
+                    </a>
+                    <Link href="/services">
+                      <Button
+                        variant="outline"
+                        size="lg"
+                        className="border-orange-600 text-orange-600 hover:bg-orange-50 px-8 bg-transparent"
+                      >
+                        View All Services
+                      </Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
-  )
+        </section>
+      </div>
+      <Footer />
+    </>
+  );
 }
