@@ -78,56 +78,14 @@ export default function AboutPage() {
       {/* <Navigation /> */}
 
       {/* Hero Section */}
-      <section className="relative pt-24 pb-16 bg-gradient-to-br from-orange-600 via-orange-400 to-orange-500 text-white min-h-[70vh] flex items-center justify-center overflow-hidden">
-        {/* Overlay for better text contrast */}
+      <section
+        className="relative text-white min-h-[70vh] flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/about.jpg')" }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/70"></div>
 
-        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/20"></div>
-        <div className="absolute inset-0 bg-black/20"></div>
-
-        {/* Animated floating icons */}
-        <div className="absolute inset-0 overflow-hidden">
-          <FaUsers
-            className="absolute top-20 left-10 text-white/20 text-4xl animate-bounce"
-            style={{ animationDelay: "0s", animationDuration: "3s" }}
-          />
-          <FaHandshake
-            className="absolute top-32 right-16 text-white/15 text-5xl animate-pulse"
-            style={{ animationDelay: "1s", animationDuration: "4s" }}
-          />
-          <FaLightbulb
-            className="absolute bottom-32 left-20 text-white/20 text-3xl animate-bounce"
-            style={{ animationDelay: "2s", animationDuration: "3.5s" }}
-          />
-          <FaBuilding
-            className="absolute top-40 left-1/3 text-white/15 text-4xl animate-pulse"
-            style={{ animationDelay: "0.5s", animationDuration: "5s" }}
-          />
-          <FaThLarge
-            className="absolute bottom-20 right-20 text-white/20 text-3xl animate-bounce"
-            style={{ animationDelay: "1.5s", animationDuration: "4s" }}
-          />
-          <FaChartLine
-            className="absolute top-16 right-1/3 text-white/15 text-4xl animate-pulse"
-            style={{ animationDelay: "2.5s", animationDuration: "3s" }}
-          />
-          <FaGlobe
-            className="absolute bottom-40 left-1/4 text-white/20 text-5xl animate-bounce"
-            style={{ animationDelay: "3s", animationDuration: "4.5s" }}
-          />
-          <FaStar
-            className="absolute top-24 left-2/3 text-white/15 text-3xl animate-pulse"
-            style={{ animationDelay: "0.8s", animationDuration: "3.5s" }}
-          />
-          <FaRocket
-            className="absolute bottom-24 right-1/3 text-white/20 text-4xl animate-bounce"
-            style={{ animationDelay: "1.8s", animationDuration: "4s" }}
-          />
-          <FaHeart
-            className="absolute top-36 right-10 text-white/15 text-3xl animate-pulse"
-            style={{ animationDelay: "2.2s", animationDuration: "5s" }}
-          />
-        </div>
-
+        {/* Hero Content */}
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
           <h1 className="text-3xl md:text-5xl font-bold mb-6">About Us</h1>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto">
@@ -279,8 +237,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      {/* Impact Video Section */}
 
       <Footer />
     </div>

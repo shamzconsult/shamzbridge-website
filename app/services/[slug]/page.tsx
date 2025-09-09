@@ -1,3 +1,5 @@
+"use client";
+
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,11 +12,11 @@ import {
   Heart,
   FileText,
   Code,
-  ArrowLeft,
   CheckCircle,
 } from "lucide-react";
 import Link from "next/link";
 import Footer from "@/components/ui/footer";
+import { useEffect, useState } from "react";
 
 const serviceData = {
   "programs-projects-management": {
@@ -229,44 +231,57 @@ const serviceData = {
   },
 };
 
-export default async function ServicePage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  // Await the params promise
-  const resolvedParams = await params;
-  const service = serviceData[resolvedParams.slug as keyof typeof serviceData];
+export default function ServicePage({ params }: { params: { slug: string } }) {
+  const service = serviceData[params.slug as keyof typeof serviceData];
+  const [currentImage, setCurrentImage] = useState(0);
 
   if (!service) {
     notFound();
   }
 
   const IconComponent = service.icon;
+  const heroImages = ["/bg1.jpg", "/bg2.jpg", "/shamz.jpg"];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
 
   return (
     <>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white">
         {/* Hero Section */}
-        <section className="py-20  bg-gradient-to-br from-orange-600 via-orange-400 to-orange-500 text-white ">
-          <div className="max-w-7xl mx-auto px-6">
+        <section
+          className="relative py-20 text-white flex items-center justify-center text-center"
+          style={{
+            backgroundImage: `url(${heroImages[currentImage]})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            transition: "background-image 1s ease-in-out",
+          }}
+        >
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/80" />
+
+          <div className="relative z-10 max-w-7xl mx-auto px-6">
             <div className="flex items-center justify-center mb-8">
               <div className="bg-white/20 p-6 rounded-full">
                 <IconComponent className="h-16 w-16" />
               </div>
             </div>
-            <div className="text-center">
-              <h1 className="text-3xl md:text-5xl font-bold mb-6">
-                {service.title}
-              </h1>
-              <p className="text-xl md:text-2xl text-orange-100 max-w-4xl mx-auto leading-relaxed">
-                {service.longDescription}
-              </p>
-            </div>
+            <h1 className="text-3xl md:text-5xl font-bold mb-6">
+              {service.title}
+            </h1>
+            <p className="text-xl md:text-2xl  max-w-4xl mx-auto leading-relaxed">
+              {service.longDescription}
+            </p>
           </div>
         </section>
 
         {/* Main Content */}
+
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">

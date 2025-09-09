@@ -50,7 +50,7 @@ export default function WhyChooseUs() {
               <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-orange-600 text-white mb-6 group-hover:shadow-lg transition-shadow duration-300">
                 <feature.icon className="h-10 w-10" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-teal-600 transition-colors">
+              <h3 className="text-xl font-bold text-slate-900 mb-4  transition-colors">
                 {feature.title}
               </h3>
               <p className="text-slate-600 leading-relaxed">
