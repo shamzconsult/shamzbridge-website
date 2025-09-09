@@ -53,7 +53,7 @@ export default function ImpactStats() {
               <div className="text-xl md:text-5xl font-bold bg-gradient-to-r from-teal-400 to-amber-400 bg-clip-text text-transparent mb-2">
                 {stat.number}
               </div>
-              <h3 className="text-xl font-semibold mb-2 group-hover:text-teal-300 transition-colors">
+              <h3 className="text-xl font-semibold mb-2  transition-colors">
                 {stat.label}
               </h3>
               <p className="text-slate-300 text-sm">{stat.description}</p>
@@ -61,15 +61,15 @@ export default function ImpactStats() {
           ))}
         </div>
 
-        <div className="text-center">
+        {/* <div className="text-center">
           <Button
             size="lg"
-            className="bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105"
+            className="bg-white hover:bg-gray-100 text-orange-500 px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105"
           >
             View Our Projects
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
-        </div>
+        </div> */}
       </div>
     </section>
   );

@@ -56,8 +56,8 @@ export const sponsors = [
   },
   {
     id: 10,
-    src: "https://cdn.hashnode.com/res/hashnode/image/upload/v1724048508321/fe5a4529-63dc-4717-9884-0a12a523b8bf.jpeg",
-    alt: "Walk-In Tech",
-    name: "Walk-In Tech",
+    src: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1751380639/WIT-logo_rcbccr.png",
+    alt: "WIT Innovations",
+    name: "WIT Innovations",
   },
 ];

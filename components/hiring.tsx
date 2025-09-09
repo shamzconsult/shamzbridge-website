@@ -126,75 +126,36 @@ export default function HiringAdvert() {
   return (
     <>
       {/* Hero section */}
-      <section className="relative overflow-hidden">
-        <div className="flex min-h-[70vh]">
-          <div
-            className={`w-1/2 bg-orange-400 transition-all duration-1000 ease-out ${
-              isVisible ? "translate-x-0" : "-translate-x-full"
+      <section
+        className="relative min-h-[70vh] flex items-center justify-center bg-cover bg-center bg-no-repeat text-white"
+        style={{ backgroundImage: "url('/careerhero.jpg')" }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/75"></div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1
+            className={`font-serif text-3xl md:text-5xl font-bold mb-6 transition-all duration-700 delay-300 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-8"
             }`}
-          ></div>
-          <div
-            className={`w-1/2 bg-orange-400 transition-all duration-1000 ease-out ${
-              isVisible ? "translate-x-0" : "translate-x-full"
+          >
+            Join Our Team
+          </h1>
+          <p
+            className={`md:text-xl  max-w-3xl mx-auto transition-all duration-700 delay-500 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-8"
             }`}
-          ></div>
+          >
+            Be part of a mission-driven organization that creates lasting
+            positive impact in communities worldwide. Build your career while
+            building a better future.
+          </p>
         </div>
-
-        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/20"></div>
-        <div className="absolute inset-0 bg-black/20"></div>
-
-        {floaterPositions.map((floater, index) => (
-          <div
-            key={index}
-            className={`absolute bg-white/10 rounded-full ${floater.size} ${floater.animation} ${floater.delay}`}
-            style={{
-              top: floater.top,
-              left: floater.left || undefined,
-              right: floater.right || undefined,
-            }}
-          ></div>
-        ))}
-
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-            <h1
-              className={`font-serif text-3xl md:text-5xl font-bold mb-6 transition-all duration-700 delay-300 ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-8"
-              }`}
-            >
-              Join Our Team
-            </h1>
-            <p
-              className={`md:text-xl text-orange-100 max-w-3xl mx-auto mb-10 transition-all duration-700 delay-500 ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-8"
-              }`}
-            >
-              Be part of a mission-driven organization that creates lasting
-              positive impact in communities worldwide. Build your career while
-              building a better future.
-            </p>
-          </div>
-        </div>
-
-        <style jsx>{`
-          @keyframes scroll {
-            0% {
-              transform: translateY(0);
-              opacity: 1;
-            }
-            100% {
-              transform: translateY(5px);
-              opacity: 0.5;
-            }
-          }
-          .animate-scroll {
-            animation: scroll 2s infinite;
-          }
-        `}</style>
       </section>
 
       <section className="min-h-screen max-w-6xl mx-auto px-4 sm:px-6 mb-8">

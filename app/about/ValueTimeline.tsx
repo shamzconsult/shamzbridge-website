@@ -18,7 +18,7 @@ export function ValueTimeline({ values, className }: ValuesTimelineProps) {
     <section
       className="py-20 relative bg-cover bg-center bg-no-repeat text-white"
       style={{
-        backgroundImage: "url('/about.jpg')",
+        backgroundImage: "url('/bg2.jpg')",
       }}
     >
       {/* Background overlay for better text readability */}
