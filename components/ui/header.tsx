@@ -144,7 +144,7 @@ export default function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden fixed inset-0 z-40 bg-white bg-opacity-95 backdrop-blur-sm"
+            className="md:hidden fixed inset-0 z-40 bg-[#1E1E1E] bg-opacity-95 backdrop-blur-sm"
             onClick={() => setIsOpen(false)}
           >
             <div className="h-screen pt-32 px-6 space-y-8">
@@ -157,7 +157,7 @@ export default function Header() {
                 >
                   <Link
                     href={item.href}
-                    className="block text-gray-600 hover:text-gray-900 border-b border-gray-200 text-xl font-medium py-4 transition duration-300 ease-in-out"
+                    className="block text-gray-400 hover:text-gray-50 border-b border-gray-800 text-xl font-medium py-4 transition duration-300 ease-in-out"
                     onClick={() => setIsOpen(false)}
                   >
                     {item.name}
