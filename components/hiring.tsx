@@ -105,9 +105,9 @@ export default function HiringAdvert() {
   const [isVisible, setIsVisible] = useState(false);
   const [jobs, setJobs] = useState<JobType[]>([]);
   const [totalJobs, setTotalJobs] = useState(0);
+  const [loading, setLoading] = useState(true); // ✅ new state
 
   useEffect(() => {
-    // Fetch jobs data
     const fetchData = async () => {
       try {
         const data = await getAllJob();
@@ -115,11 +115,12 @@ export default function HiringAdvert() {
         setTotalJobs(data.jobs?.length || 0);
       } catch (error) {
         console.error("Error fetching jobs:", error);
+      } finally {
+        setLoading(false); // ✅ stop loading when done
       }
     };
 
     fetchData();
-
     setIsVisible(true);
   }, []);
 
@@ -159,16 +160,20 @@ export default function HiringAdvert() {
       </section>
 
       <section className="min-h-screen max-w-6xl mx-auto px-4 sm:px-6 mb-8">
-        {/* <div className="mt-1 text-center mb-8 sm:mb-0 sm:text-right">
-          <ContactButton />
-        </div> */}
-
         <div>
-          <h1 className="font-bold text-2xl px-2 text-center text-slate-800 mb-6 sm:text-left">
-            Careers ({totalJobs})
-          </h1>
+          {!loading && (
+            <h1 className="font-bold text-2xl px-2 text-center text-slate-800 mb-6 sm:text-left">
+              Careers ({totalJobs})
+            </h1>
+          )}
+
           <section className="flex flex-col gap-4 w-full">
-            {jobs.length > 0 ? (
+            {loading ? (
+              <div className="flex flex-col justify-center items-center py-20">
+                <div className="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+                <p>Loading...</p>
+              </div>
+            ) : jobs.length > 0 ? (
               jobs.map(
                 ({
                   title,
@@ -270,7 +275,9 @@ export default function HiringAdvert() {
                 )
               )
             ) : (
-              <div className="text-gray-500"></div>
+              <div className="text-gray-500 text-center py-10">
+                No jobs available at the moment.
+              </div>
             )}
           </section>
         </div>
