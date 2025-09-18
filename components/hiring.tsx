@@ -23,89 +23,11 @@ export type JobType = {
   description: string;
 };
 
-const floaterPositions = [
-  // Left side floaters
-  {
-    top: "15%",
-    left: "10%",
-    size: "w-16 h-16",
-    animation: "animate-bounce",
-    delay: "delay-1000",
-  },
-  {
-    top: "35%",
-    left: "15%",
-    size: "w-12 h-12",
-    animation: "animate-pulse",
-    delay: "delay-1500",
-  },
-  {
-    top: "55%",
-    left: "5%",
-    size: "w-14 h-14",
-    animation: "animate-bounce",
-    delay: "delay-2000",
-  },
-  {
-    top: "75%",
-    left: "12%",
-    size: "w-10 h-10",
-    animation: "animate-pulse",
-    delay: "delay-500",
-  },
-
-  // Right side floaters
-  {
-    top: "15%",
-    right: "10%",
-    size: "w-16 h-16",
-    animation: "animate-bounce",
-    delay: "delay-1000",
-  },
-  {
-    top: "35%",
-    right: "15%",
-    size: "w-12 h-12",
-    animation: "animate-pulse",
-    delay: "delay-1500",
-  },
-  {
-    top: "55%",
-    right: "5%",
-    size: "w-14 h-14",
-    animation: "animate-bounce",
-    delay: "delay-2000",
-  },
-  {
-    top: "75%",
-    right: "12%",
-    size: "w-10 h-10",
-    animation: "animate-pulse",
-    delay: "delay-500",
-  },
-
-  // Center floaters
-  {
-    top: "25%",
-    left: "45%",
-    size: "w-8 h-8",
-    animation: "animate-pulse",
-    delay: "delay-700",
-  },
-  {
-    top: "65%",
-    left: "48%",
-    size: "w-10 h-10",
-    animation: "animate-bounce",
-    delay: "delay-1200",
-  },
-];
-
 export default function HiringAdvert() {
   const [isVisible, setIsVisible] = useState(false);
   const [jobs, setJobs] = useState<JobType[]>([]);
   const [totalJobs, setTotalJobs] = useState(0);
-  const [loading, setLoading] = useState(true); // ✅ new state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -116,7 +38,7 @@ export default function HiringAdvert() {
       } catch (error) {
         console.error("Error fetching jobs:", error);
       } finally {
-        setLoading(false); // ✅ stop loading when done
+        setLoading(false);
       }
     };
 
@@ -162,7 +84,7 @@ export default function HiringAdvert() {
       <section className="min-h-screen max-w-6xl mx-auto px-4 sm:px-6 mb-8">
         <div>
           {!loading && (
-            <h1 className="font-bold text-2xl px-2 text-center text-slate-800 mb-6 sm:text-left">
+            <h1 className="font-bold text-2xl px-2 text-center text-slate-800 mb-6 sm:text-left mt-4">
               Careers ({totalJobs})
             </h1>
           )}
