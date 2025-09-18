@@ -39,7 +39,7 @@ export default function Header() {
 
       scrollTimeoutRef.current = setTimeout(() => {
         setShowHeader(true);
-      }, 500);
+      }, 100);
     };
 
     window.addEventListener("scroll", handleScroll);
