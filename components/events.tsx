@@ -24,11 +24,11 @@ export const formatDate = (timestamp: number): string => {
   const monthDay = formattedDate[0].split(" ");
   const month = monthDay[0];
   const day = monthDay[1];
-
   const year = formattedDate[1];
 
   return `${month}-${day}-${year}`;
 };
+
 const Events = () => {
   const [event, setEvent] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -55,6 +55,7 @@ const Events = () => {
       return eventEndDate > todayTimestamp;
     });
   };
+
   const checkForPastEvents = (eventDate: EventType[]) => {
     const todayTimestamp = Date.now();
     return eventDate.filter((item) => {
@@ -83,10 +84,7 @@ const Events = () => {
             className="relative text-white min-h-[70vh] flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: "url('/eventhero.jpg')" }}
           >
-            {/* Overlay */}
             <div className="absolute inset-0 bg-black/80"></div>
-
-            {/* Hero Content */}
             <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
               <h1 className="text-3xl md:text-5xl font-bold mb-6">Events</h1>
               <p className="text-xl text-blue-100 max-w-3xl mx-auto">
@@ -96,14 +94,16 @@ const Events = () => {
               </p>
             </div>
           </section>
-          <div className="flex flex-col justify-center items-center gap-20 text-gray-600 p-8">
-            <section className="flex flex-col justify-center items-center gap-6">
+
+          <div className="flex flex-col justify-center items-center gap-20 text-gray-600 p-4 md:p-8">
+            {/* Upcoming Events */}
+            <section className="flex flex-col justify-center items-center gap-6 w-full max-w-7xl">
               <h1 className="font-bold text-lg md:text-2xl">Upcoming Events</h1>
-              <p>
+              <p className="text-center px-4">
                 Discover upcoming opportunities to gain insights, build
                 meaningful networks, and unlock growth.
               </p>
-              <div className="flex flex-wrap justify-center items-start gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 w-full">
                 {filteredUpcomingEvents.length > 0 ? (
                   filteredUpcomingEvents.map(
                     ({
@@ -119,36 +119,37 @@ const Events = () => {
                         <Link
                           href={`/events/${_id}`}
                           key={_id}
-                          className="flex flex-col gap-2 lg:w-[25%] border border-slate-100 rounded-md overflow-hidden hover:border-orange-300"
+                          className="flex flex-col border border-slate-200 rounded-lg overflow-hidden hover:border-orange-300 hover:shadow-md transition-all duration-300 h-full"
                         >
-                          <img
-                            className="h-full w-full object-contain  object-top"
-                            src={image || "/placeholder.svg"}
-                            alt="event"
-                          />
-                          <div className="flex flex-col gap-2 p-2">
-                            <h2 className="opacity-70 font-bold truncate max-w-[150px] xl:max-w-[200px]">
+                          <div className="aspect-video overflow-hidden">
+                            <img
+                              className="w-full h-full object-cover"
+                              src={image || "/placeholder.svg"}
+                              alt="event"
+                            />
+                          </div>
+                          <div className="flex flex-col gap-3 p-4 flex-1">
+                            <h2 className="font-bold text-gray-800 text-sm md:text-base line-clamp-2 min-h-[2.5rem]">
                               {title}
                             </h2>
-                            <div>
-                              <h3 className="opacity-70 truncate max-w-[450px] md:max-w-[650px] xl:max-w-[400px]">
-                                {description}
-                              </h3>
+                            
+                            <p className="text-gray-600 text-xs md:text-sm line-clamp-2 flex-1">
+                              {description}
+                            </p>
+                            
+                            <div className="flex items-center gap-2 text-xs md:text-sm text-gray-500 flex-wrap">
+                              <span>{formatDate(startDate)}</span>
+                              <span>-</span>
+                              <span>{formatDate(endDate)}</span>
                             </div>
-                            <div className="flex gap-4">
-                              <p>{formatDate(startDate)}</p>
-                              <h1 className="bold text-lg">-</h1>
-                              <p>{formatDate(endDate)}</p>
-                            </div>
+                            
+                            {/* Register Button */}
                             <div className="w-full mt-2">
-                              <a
-                                href=""
-                                className="flex justify-center items-center gap-2 w-full bg-orange-500  hover:bg-orange-600 text-white font-medium py-3 px-4 rounded-md transition-colors"
-                              >
+                              <div className="flex justify-center items-center gap-2 w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-3 md:py-3 md:px-4 rounded-md transition-colors text-sm md:text-base">
                                 Register Now
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
-                                  className="h-5 w-5"
+                                  className="h-4 w-4 md:h-5 md:w-5"
                                   viewBox="0 0 20 20"
                                   fill="currentColor"
                                 >
@@ -158,26 +159,28 @@ const Events = () => {
                                     clipRule="evenodd"
                                   />
                                 </svg>
-                              </a>
+                              </div>
                             </div>
                           </div>
                         </Link>
                       )
                   )
                 ) : (
-                  <div className="text-red-200">
+                  <div className="text-red-400 col-span-full text-center py-8">
                     No upcoming event for now...
                   </div>
                 )}
               </div>
             </section>
-            <section className="flex flex-col justify-center items-center gap-6">
+
+            {/* Past Events */}
+            <section className="flex flex-col justify-center items-center gap-6 w-full max-w-7xl">
               <h1 className="font-bold text-lg md:text-2xl">Past Events</h1>
-              <p>
+              <p className="text-center px-4">
                 Explore highlights from our past events and the positive change
                 they have created.
               </p>
-              <div className="flex flex-wrap justify-center items-start gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 w-full">
                 {filteredPastEvents.length > 0 ? (
                   filteredPastEvents.map(
                     ({
@@ -193,33 +196,35 @@ const Events = () => {
                         <Link
                           href={`/events/${_id}`}
                           key={_id}
-                          className="flex flex-col gap-2 lg:w-[25%] border border-slate-100 rounded-md overflow-hidden p-2 hover:border-orange-300"
+                          className="flex flex-col border border-slate-200 rounded-lg overflow-hidden hover:border-orange-300 hover:shadow-md transition-all duration-300 h-full"
                         >
-                          <img
-                            className="h-full w-full object-contain object-top"
-                            src={image || "/placeholder.svg"}
-                            alt="event"
-                          />
-                          <div className="flex flex-col gap-2 p-2">
-                            <h2 className="opacity-70 font-bold truncate max-w-[150px] xl:max-w-[200px]">
+                          <div className="aspect-video overflow-hidden">
+                            <img
+                              className="w-full h-full object-cover"
+                              src={image || "/placeholder.svg"}
+                              alt="event"
+                            />
+                          </div>
+                          <div className="flex flex-col gap-3 p-4 flex-1">
+                            <h2 className="font-bold text-gray-800 text-sm md:text-base line-clamp-2 min-h-[2.5rem]">
                               {title}
                             </h2>
-                            <div>
-                              <h3 className="opacity-70 truncate max-w-[450px] md:max-w-[650px] xl:max-w-[400px]">
-                                {description}
-                              </h3>
-                            </div>
-                            <div className="flex gap-4">
-                              <p>{formatDate(startDate)}</p>
-                              <h1 className="bold text-lg">-</h1>
-                              <p>{formatDate(endDate)}</p>
+                            <p className="text-gray-600 text-xs md:text-sm line-clamp-2 flex-1">
+                              {description}
+                            </p>
+                            <div className="flex items-center gap-2 text-xs md:text-sm text-gray-500 flex-wrap">
+                              <span>{formatDate(startDate)}</span>
+                              <span>-</span>
+                              <span>{formatDate(endDate)}</span>
                             </div>
                           </div>
                         </Link>
                       )
                   )
                 ) : (
-                  <div>No past event..</div>
+                  <div className="text-gray-500 col-span-full text-center py-8">
+                    No past events...
+                  </div>
                 )}
               </div>
             </section>
