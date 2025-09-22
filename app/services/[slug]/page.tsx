@@ -222,6 +222,66 @@ const serviceData = {
       "Ongoing maintenance and support",
     ],
   },
+  "talent-recruitment": {
+    icon: "Briefcase",
+    title: "Talent Recruitment",
+    description:
+      "End-to-end recruitment solutions designed to attract, assess, and onboard top talent for your organization.",
+    longDescription:
+      "Our recruitment services streamline the hiring process, ensuring organizations find the right talent efficiently. We combine modern recruitment technologies with human expertise to deliver tailored hiring solutions.",
+    features: [
+      "Job profiling and role definition",
+      "Talent sourcing and outreach",
+      "Screening and candidate assessment",
+      "Interview coordination",
+      "Onboarding support",
+      "Recruitment process optimization",
+    ],
+    benefits: [
+      "Access to top talent",
+      "Reduced hiring time",
+      "Improved candidate quality",
+      "Enhanced employer reputation",
+      "Scalable recruitment processes",
+    ],
+    process: [
+      "Client consultation and role definition",
+      "Talent search and outreach",
+      "Candidate screening and interviews",
+      "Final selection and offer",
+      "Onboarding and follow-up",
+    ],
+  },
+  branding: {
+    icon: "Star",
+    title: "Branding",
+    description:
+      "Creative branding strategies and identity design that strengthen your organization’s visibility and impact.",
+    longDescription:
+      "Our branding services help organizations establish a strong and memorable identity. From visual design to strategic positioning, we ensure your brand resonates with your target audience and stands out in the market.",
+    features: [
+      "Brand strategy development",
+      "Logo and visual identity design",
+      "Brand voice and messaging",
+      "Marketing collateral creation",
+      "Digital and social branding",
+      "Brand performance analysis",
+    ],
+    benefits: [
+      "Stronger market presence",
+      "Improved customer loyalty",
+      "Consistent brand identity",
+      "Increased visibility",
+      "Better audience connection",
+    ],
+    process: [
+      "Brand discovery and research",
+      "Strategy development",
+      "Visual and verbal identity design",
+      "Implementation across channels",
+      "Monitoring and refinement",
+    ],
+  },
 };
 
 type Props = {

@@ -8,6 +8,8 @@ import {
   FileText,
   Code,
   ArrowRight,
+  Briefcase,
+  Star,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -68,6 +70,22 @@ const services = [
     color: "text-orange-600",
     slug: "web-development",
   },
+  {
+    icon: Briefcase,
+    title: "Talent Recruitment",
+    description:
+      "End-to-end recruitment solutions designed to attract, assess, and onboard top talent for your organization.",
+    color: "text-orange-500",
+    slug: "talent-recruitment",
+  },
+  {
+    icon: Star,
+    title: "Branding",
+    description:
+      "Creative branding strategies and identity design that strengthen your organization’s visibility and impact.",
+    color: "text-orange-700",
+    slug: "branding",
+  },
 ];
 
 export default function Services() {
@@ -84,7 +102,7 @@ export default function Services() {
           </p>
         </div>
 
-        <div className=" flex flex-wrap gap-8 max-w-7xl mx-auto justify-center items-center w-full ">
+        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto justify-center items-center w-full ">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (

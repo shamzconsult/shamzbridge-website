@@ -44,7 +44,7 @@ export default function ContactButton() {
           <div className="divide-y divide-gray-100">
             <div className="px-1 py-1">
               <a
-                href="mailto:shamzbridgeconsult@gmail.com?subject=Contacting%20you%20about%20hiring%20service%20with%20Shamzbridge&body=Hi, %0D%0A%0D%0A"
+                href="mailto:hello@shamzbridgeconsult.org?subject=Contacting%20you%20about%20hiring%20service%20with%20Shamzbridge&body=Hi, %0D%0A%0D%0A"
                 className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setShowContactOptions(false)}
               >

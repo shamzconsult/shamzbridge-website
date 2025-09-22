@@ -1,28 +1,68 @@
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+"use client";
+
+import { useEffect, useState, useRef } from "react";
+import { motion, animate, useInView } from "framer-motion";
 
 const stats = [
   {
-    number: "15+",
+    number: 15,
+    suffix: "+",
     label: "Successful Projects",
     description: "Completed across various sectors",
   },
   {
-    number: "11000+",
+    number: 100,
+    suffix: "+",
     label: "Individuals Trained",
     description: "Through our capacity building programs",
   },
   {
-    number: "20+",
+    number: 5,
+    suffix: "+",
     label: "Community Events",
     description: "With sustainable development initiatives",
   },
   {
-    number: "20+",
+    number: 10,
+    suffix: "+",
     label: "Events Managed",
     description: "Rate across all our services",
   },
 ];
+
+function Counter({
+  value,
+  suffix = "",
+  duration = 2,
+  isVisible,
+}: {
+  value: number;
+  suffix?: string;
+  duration?: number;
+  isVisible: boolean;
+}) {
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    if (isVisible) {
+      const controls = animate(0, value, {
+        duration,
+        ease: "easeOut",
+        onUpdate: (latest) => {
+          setDisplayValue(Math.floor(latest));
+        },
+      });
+      return () => controls.stop();
+    }
+  }, [isVisible, value, duration]);
+
+  return (
+    <span>
+      {displayValue}
+      {suffix}
+    </span>
+  );
+}
 
 export default function ImpactStats() {
   return (
@@ -45,31 +85,36 @@ export default function ImpactStats() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {stats.map((stat, index) => (
-            <div
-              key={index}
-              className="text-center group hover:transform hover:scale-105 transition-all duration-300"
-            >
-              <div className="text-xl md:text-5xl font-bold bg-gradient-to-r from-teal-400 to-amber-400 bg-clip-text text-transparent mb-2">
-                {stat.number}
-              </div>
-              <h3 className="text-xl font-semibold mb-2  transition-colors">
-                {stat.label}
-              </h3>
-              <p className="text-slate-300 text-sm">{stat.description}</p>
-            </div>
-          ))}
-        </div>
+          {stats.map((stat, index) => {
+            const ref = useRef(null);
+            const isInView = useInView(ref, { margin: "-50px", once: false });
 
-        {/* <div className="text-center">
-          <Button
-            size="lg"
-            className="bg-white hover:bg-gray-100 text-orange-500 px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105"
-          >
-            View Our Projects
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-        </div> */}
+            return (
+              <motion.div
+                key={index}
+                ref={ref}
+                className="text-center group hover:transform hover:scale-105 transition-all duration-300"
+                initial={{ opacity: 0, y: 40 }}
+                animate={
+                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }
+                }
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+              >
+                <div className="text-xl md:text-5xl font-bold bg-gradient-to-r from-teal-400 to-amber-400 bg-clip-text text-transparent mb-2">
+                  <Counter
+                    value={stat.number}
+                    suffix={stat.suffix}
+                    isVisible={isInView}
+                  />
+                </div>
+                <h3 className="text-xl font-semibold mb-2 transition-colors">
+                  {stat.label}
+                </h3>
+                <p className="text-slate-300 text-sm">{stat.description}</p>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

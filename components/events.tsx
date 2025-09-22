@@ -82,7 +82,10 @@ const Events = () => {
           {/* Hero Section */}
           <section
             className="relative text-white min-h-[70vh] flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: "url('/eventhero.jpg')" }}
+            style={{
+              backgroundImage:
+                "url('https://cdn.hashnode.com/res/hashnode/image/upload/v1724053027502/8fc855a4-40a9-4c94-98d9-262ad3ce443c.jpeg')",
+            }}
           >
             <div className="absolute inset-0 bg-black/80"></div>
             <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
@@ -132,17 +135,17 @@ const Events = () => {
                             <h2 className="font-bold text-gray-800 text-sm md:text-base line-clamp-2 min-h-[2.5rem]">
                               {title}
                             </h2>
-                            
+
                             <p className="text-gray-600 text-xs md:text-sm line-clamp-2 flex-1">
                               {description}
                             </p>
-                            
+
                             <div className="flex items-center gap-2 text-xs md:text-sm text-gray-500 flex-wrap">
                               <span>{formatDate(startDate)}</span>
                               <span>-</span>
                               <span>{formatDate(endDate)}</span>
                             </div>
-                            
+
                             {/* Register Button */}
                             <div className="w-full mt-2">
                               <div className="flex justify-center items-center gap-2 w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-3 md:py-3 md:px-4 rounded-md transition-colors text-sm md:text-base">

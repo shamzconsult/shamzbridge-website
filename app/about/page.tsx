@@ -141,20 +141,6 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
               <div className="p-8 text-center">
-                <FaThLarge className="h-16 w-16 text-purple-600 mx-auto mb-6" />
-                <h3 className=" text-3xl md:text-4xl font-bold text-orange-600 mb-4">
-                  Our Mission
-                </h3>
-                <p className="text-lg text-gray-600">
-                  Our mission is to cultivate an empowering atmosphere for skill
-                  acquisition and capacity enhancement that heralds a holistic
-                  growth and development for individuals and organizations
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="p-8 text-center">
                 <FaEye className="h-16 w-16 text-teal-600 mx-auto mb-6" />
                 <h3 className=" text-3xl md:text-4xl font-bold text-orange-600 mb-4">
                   Our Vision
@@ -164,6 +150,20 @@ export default function AboutPage() {
                   personal and professional capacities of individuals and
                   businesses, fostering efficiency, heightened productivity, and
                   innovation.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="p-8 text-center">
+                <FaThLarge className="h-16 w-16 text-purple-600 mx-auto mb-6" />
+                <h3 className=" text-3xl md:text-4xl font-bold text-orange-600 mb-4">
+                  Our Mission
+                </h3>
+                <p className="text-lg text-gray-600">
+                  Our mission is to cultivate an empowering atmosphere for skill
+                  acquisition and capacity enhancement that heralds a holistic
+                  growth and development for individuals and organizations
                 </p>
               </div>
             </div>
@@ -222,17 +222,16 @@ export default function AboutPage() {
             Watch how our work has transformed communities and empowered
             individuals across the globe.
           </p>
-
           <div className="relative bg-gray-200 rounded-lg overflow-hidden shadow-lg">
             <iframe
               width="100%"
-              height="400"
-              src="https://www.youtube.com/watch?v=Cmr57bo0JjQ"
+              height="500"
+              src="https://www.youtube.com/embed/WXg2uC9CBSY"
               title="Impact Video"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
-              className="w-full h-96 object-cover"
+              className="w-full h-[40vh] md:h-[60vh] object-cover rounded-lg"
             ></iframe>
           </div>
         </div>
