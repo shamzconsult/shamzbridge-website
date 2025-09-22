@@ -2,15 +2,32 @@
 
 import { InstagramLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
+import { useState } from "react";
 import { FaMapPin, FaPhone } from "react-icons/fa";
 import { MdOutlineMailOutline } from "react-icons/md";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+
   const chatOnWhatsApp = () => {
     const url = `https://wa.me/${+2348177098608}?text=${encodeURIComponent(
       "Welcome to ShamzBridge, let's talk!"
     )}`;
     window.open(url, "_blank");
+  };
+
+  const handleSubscribe = () => {
+    if (!email) {
+      setMessage("⚠️ Please enter your email.");
+      setIsSuccess(false);
+      return;
+    }
+    // Here you could send the email to an API if needed
+    setMessage("✅ You have subscribed successfully!");
+    setIsSuccess(true);
+    setEmail("");
   };
 
   return (
@@ -73,7 +90,7 @@ export default function Footer() {
               <div className="space-y-2 opacity-90">
                 <div className="flex items-center gap-2">
                   <MdOutlineMailOutline className="h-4 w-4" />
-                  <span>shamzbridgeconsult@gmail.com</span>
+                  <span>hello@shamzbridgeconsult.org</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <FaPhone className="h-4 w-4" />
@@ -94,18 +111,35 @@ export default function Footer() {
               <p className="text-sm opacity-90">
                 Subscribe to our newsletter for the latest updates and insights.
               </p>
-              <div className="flex flex-col sm:flex-row gap-2 w-full">
-                <input
-                  placeholder="Enter your email"
-                  className="flex-1 px-3 py-2 bg-white text-black border-none rounded-md"
-                />
-                <button className="bg-orange-500 hover:bg-orange-700 px-4 py-2 rounded-md">
-                  Subscribe
-                </button>
-              </div>
+
+              {!isSuccess ? (
+                <div className="flex flex-col sm:flex-row gap-2 w-full">
+                  <input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    className="flex-1 px-3 py-2 bg-white text-black border-none rounded-md"
+                  />
+                  <button
+                    onClick={handleSubscribe}
+                    className="bg-orange-500 hover:bg-orange-700 px-4 py-2 rounded-md"
+                  >
+                    Subscribe
+                  </button>
+                </div>
+              ) : null}
+
+              {message && (
+                <p
+                  className={`text-sm mt-2 ${
+                    isSuccess ? "text-green-400" : "text-red-400"
+                  }`}
+                >
+                  {message}
+                </p>
+              )}
             </div>
           </div>
-
           {/* Social Icons */}
           <div className="flex flex-col md:flex-row justify-center items-center gap-4 mt-6 md:mt-10">
             <h1>Follow us on :</h1>

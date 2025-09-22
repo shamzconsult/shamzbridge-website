@@ -220,7 +220,7 @@ export default function ServicesPage() {
                           ))}
                         </ul>
                         <a
-                          href="mailto:shamzbridgeconsult@gmail.com?subject=Contacting%20you%20about%20hiring%20service%20with%20Shamzbridge&body=Hi, %0D%0A%0D%0A"
+                          href="mailto:hello@shamzbridgeconsult.org?subject=Contacting%20you%20about%20hiring%20service%20with%20Shamzbridge&body=Hi, %0D%0A%0D%0A"
                           target="_blank"
                           rel="noreferrer noopener"
                           className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-2 rounded-md font-medium text-lg transition-colors duration-200"
@@ -267,7 +267,7 @@ export default function ServicesPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="mailto:shamzbridgeconsult@gmail.com?subject=Contacting%20you%20about%20hiring%20service%20with%20Shamzbridge&body=Hi, %0D%0A%0D%0A"
+                href="mailto:hello@shamzbridgeconsult.org?subject=Contacting%20you%20about%20hiring%20service%20with%20Shamzbridge&body=Hi, %0D%0A%0D%0A"
                 target="_blank"
                 rel="noreferrer noopener"
                 className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-2 rounded-md font-medium text-lg transition-colors duration-200 shadow-lg hover:shadow-xl"

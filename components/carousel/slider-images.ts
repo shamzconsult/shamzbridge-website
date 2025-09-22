@@ -19,4 +19,12 @@ export const images = [
     id: 5,
     src: "https://cdn.hashnode.com/res/hashnode/image/upload/v1724053038294/1113c731-9a24-4cfc-bd1c-5118e3b8633c.jpeg",
   },
+  {
+    id: 6,
+    src: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1758546636/homebg1_szu1as.jpg",
+  },
+  {
+    id: 7,
+    src: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1758546636/homebg_e9kz1j.jpg",
+  },
 ];
