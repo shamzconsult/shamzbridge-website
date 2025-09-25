@@ -26,7 +26,7 @@ export default function ServicesPage() {
         "Active stakeholder engagement",
         "Continuous monitoring and evaluation",
       ],
-      img: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1755856677/69770a14-91c1-49b3-a865-989d700caab0_q8shh4.jpg",
+      img: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1758806165/WhatsApp_Image_2025-09-25_at_13.14.48_834bc9da_dtwew2.jpg",
       caseStudy:
         " Planned, managed, and executed the JCI Aso Presidential Campaign for Felix Akinyemi, which culminated in a successful election victory and his emergence as President. The campaign strategy combined effective planning, stakeholder engagement, and impactful execution, ensuring strong visibility and support throughout the process.",
     },
@@ -106,7 +106,7 @@ export default function ServicesPage() {
         "Quality & consistency",
         "Multi-platform adaptability",
       ],
-      img: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1755856246/contentdev_umsxtx.jpg",
+      img: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1758806023/Screenshot_2025-09-25_141248_tbekwx.png",
       caseStudy:
         "Developed a comprehensive report for the Mswitch Creative Academy for Post-Production, thoroughly documenting every detail and highlight—from the Audio Masterclass Cohort 1 training sessions to the Demo-Day graduation. This helped our client preserve the full experience, creating a resource that both captures the event’s impact and allows stakeholders to relive the moments.",
     },
@@ -122,7 +122,7 @@ export default function ServicesPage() {
         "Scalable architecture",
         "SEO & integration capabilities",
       ],
-      img: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1755856254/webdev_n6nwvl.png",
+      img: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1758806024/Screenshot_2025-09-25_141216_dfbl2c.png",
       caseStudy:
         "Designed and developed a user-friendly website for Brandbuild.ng, creating an engaging platform that effectively showcases their creative services. The revamped site not only enhanced brand presentation but also boosted client interaction and audience engagement.",
     },

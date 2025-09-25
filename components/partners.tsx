@@ -1,6 +1,6 @@
-import Link from "next/link";
+// import Link from "next/link";
 import TestimonySlider from "./testimonials/testimony-slider";
-import Newsletter from "./newsletter";
+// import Newsletter from "./newsletter";
 import Sponsors from "./sponsor";
 
 export default function Partners() {
@@ -48,11 +48,10 @@ export default function Partners() {
             id="partner"
             className="max-w-3xl mx-auto text-center pb-12 md:pb-16"
           >
-            <h2 className='h2 mb-4 text-orange-600'>
-              Our Trusted Partners
-            </h2>
-            <p className='text-xl text-gray-600' data-aos='zoom-y-out'>
-              We're proud to collaborate with leading organizations that share our commitment to positive impact and sustainable development.
+            <h2 className="h2 mb-4 text-orange-600">Our Trusted Partners</h2>
+            <p className="text-xl text-gray-600" data-aos="zoom-y-out">
+              We're proud to collaborate with leading organizations that share
+              our commitment to positive impact and sustainable development.
             </p>
           </div>
 

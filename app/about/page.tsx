@@ -222,7 +222,7 @@ export default function AboutPage() {
             Watch how our work has transformed communities and empowered
             individuals across the globe.
           </p>
-          <div className="relative bg-gray-200 rounded-lg overflow-hidden shadow-lg">
+          <div className="relative bg-gray-200 rounded-2xl overflow-hidden  p-2">
             <iframe
               width="100%"
               height="500"
@@ -231,7 +231,7 @@ export default function AboutPage() {
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
-              className="w-full h-[40vh] md:h-[60vh] object-cover rounded-lg"
+              className="w-full h-[40vh] md:h-[60vh] object-cover rounded-2xl"
             ></iframe>
           </div>
         </div>

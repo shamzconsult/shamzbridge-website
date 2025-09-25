@@ -1,9 +1,9 @@
 export const sponsors = [
   {
     id: 1,
-    src: "https://cdn.hashnode.com/res/hashnode/image/upload/v1716454682431/78e5c2ff-9368-40bd-82a9-18422aec87d9.jpeg",
-    alt: "Kwara state College of Education",
-    name: "Kwara State College of Education",
+    src: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1758806666/Presidential-Compressed_s1zdvn.jpg",
+    alt: "Presidential CNG Initiative",
+    name: "Presidential CNG Initiative",
   },
   {
     id: 2,
@@ -19,15 +19,15 @@ export const sponsors = [
   },
   {
     id: 4,
-    src: "https://cdn.hashnode.com/res/hashnode/image/upload/v1716454743578/1733f90e-c430-41b3-89ee-04fb95bb1700.jpeg",
-    alt: "PGSAUI",
-    name: "Postgraduate Students, Unilorin",
+    src: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1758806666/Ministry-Labour_l11q1v.png",
+    alt: "FMLE",
+    name: "Federal Ministry of Labour and employment",
   },
   {
     id: 5,
-    src: "https://cdn.hashnode.com/res/hashnode/image/upload/v1716454788631/e38c6e32-e78e-4082-a5ce-b12cfae116eb.jpeg",
-    alt: "Students Union, UI",
-    name: "Students Union, Unilorin",
+    src: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1740037804/HR_LOGO1_4_3_nfapse.png",
+    alt: "Studio3Launchpad",
+    name: "Studio3Launchpad",
   },
 
   {
@@ -59,5 +59,17 @@ export const sponsors = [
     src: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1751380639/WIT-logo_rcbccr.png",
     alt: "WIT Innovations",
     name: "WIT Innovations",
+  },
+  {
+    id: 11,
+    src: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1758806666/Development-Bank_zu8spp.jpg",
+    alt: "DBN",
+    name: "Development Bank of Nigeria",
+  },
+  {
+    id: 12,
+    src: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1758806666/brandbuild_syoo9r.jpg",
+    alt: "Brandbuild",
+    name: "Brandbuild.ng",
   },
 ];

@@ -100,7 +100,7 @@ export default function ImpactStats() {
                 }
                 transition={{ duration: 0.6, delay: index * 0.2 }}
               >
-                <div className="text-xl md:text-5xl font-bold bg-gradient-to-r from-teal-400 to-amber-400 bg-clip-text text-transparent mb-2">
+                <div className="text-2xl md:text-5xl font-bold bg-gradient-to-r from-teal-400 to-amber-400 bg-clip-text text-transparent mb-2">
                   <Counter
                     value={stat.number}
                     suffix={stat.suffix}
