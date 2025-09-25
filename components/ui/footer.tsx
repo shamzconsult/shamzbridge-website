@@ -41,7 +41,7 @@ export default function Footer() {
 
       <div className="relative z-10 h-full flex flex-col justify-center">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Company Info */}
             <div className="space-y-4">
               <h3 className="font-serif text-xl font-bold">
@@ -98,8 +98,9 @@ export default function Footer() {
                 </div>
                 <div className="flex items-center gap-2">
                   <FaMapPin className="h-4 w-4" />
-                  <span>
-                    4th Floor, Labour House, Central Business District, Abuja
+                  <span className="text-sm">
+                    Major Oil Complex, Mbora Service Station, Plot 1524,
+                    Cadastral Zone, Co6, Jabi Airport Road, Abuja.
                   </span>
                 </div>
               </div>

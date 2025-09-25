@@ -74,7 +74,7 @@ export default function ServicesPage() {
         "Audience engagement",
         "Seamless execution & evaluation",
       ],
-      img: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1755856250/eventhost_df9ixt.jpg",
+      img: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1758824510/IMG_1516-Enhanced-NR-2_hxzkie.jpg",
       caseStudy:
         "Successfully hosted and curated the official report for the 13th BABA 'N' YARA Novelty Games, organized by Junior Chamber International (JCI), Aso, helping foster sportsmanship, enhanced marketing visibility, and created valuable networking opportunities while ensuring a memorable experience for attendees across the city",
     },
