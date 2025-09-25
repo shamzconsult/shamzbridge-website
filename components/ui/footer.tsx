@@ -3,7 +3,7 @@
 import { InstagramLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { useState } from "react";
-import { FaMapPin, FaPhone } from "react-icons/fa";
+import { FaMapPin, FaPhone, FaTiktok } from "react-icons/fa";
 import { MdOutlineMailOutline } from "react-icons/md";
 
 export default function Footer() {
@@ -45,7 +45,7 @@ export default function Footer() {
             {/* Company Info */}
             <div className="space-y-4">
               <h3 className="font-serif text-xl font-bold">
-                Shamzbridgeconsult
+                Shamzbridge consult
               </h3>
               <p className="opacity-90">
                 Empowering growth and building futures through strategic
@@ -187,6 +187,17 @@ export default function Footer() {
                   aria-label="linkedin"
                 >
                   <LinkedInLogoIcon className="w-10 h-10 p-2" />
+                </a>
+              </li>
+              <li>
+                <a
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  href="https://www.tiktok.com/@shamzbridge"
+                  className="flex justify-center items-center text-gray-600 hover:text-gray-900 bg-white rounded-full shadow transition duration-150 ease-in-out"
+                  aria-label="tiktok"
+                >
+                  <FaTiktok className="w-10 h-10 p-2" />
                 </a>
               </li>
 

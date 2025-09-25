@@ -41,7 +41,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900/40 via-orange-900/40 to-slate-900/40" />
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl text-white  font-bold mb-6 animate-fade-in">
+          <h1 className="text-2xl md:text-4xl lg:text-5xl text-white  font-bold mb-6 animate-fade-in">
             Empowering Growth,{" "}
             <span className="bg-gradient-to-r from-teal-400 to-orange-500 bg-clip-text text-transparent">
               Building Futures
