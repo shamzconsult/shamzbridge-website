@@ -72,4 +72,10 @@ export const sponsors = [
     alt: "Brandbuild",
     name: "Brandbuild.ng",
   },
+  {
+    id: 13,
+    src: "https://res.cloudinary.com/dcgghkk7q/image/upload/v1758824066/WhatsApp_Image_2025-09-25_at_17.05.46_7c3a3d7b_heq0ab.jpg",
+    alt: "SAM-VIC Insurance Brokers Limited",
+    name: "SAM-VIC Insurance Brokers Limited",
+  },
 ];
