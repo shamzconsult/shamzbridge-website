@@ -1,87 +1,91 @@
 "use client";
-import ContactUs from "@/components/contact/contact-us";
-import { FlipWords } from "./ui/flip-words";
 
+import { Button } from "@/components/ui/button";
+import { Play } from "lucide-react";
+import { useState, useEffect } from "react";
+import { images } from "./carousel/slider-images";
+import VideoModal from "./Video-modal";
 export default function Hero() {
-  const words = ["transferable skills", "rewarding skills"];
-  return (
-    <section className='relative'>
-      <div
-        className='absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none -z-1'
-        aria-hidden='true'
-      >
-        <svg
-          width='1360'
-          height='578'
-          viewBox='0 0 1360 578'
-          xmlns='http://www.w3.org/2000/svg'
-        >
-          <defs>
-            <linearGradient
-              x1='50%'
-              y1='0%'
-              x2='50%'
-              y2='100%'
-              id='illustration-01'
-            >
-              <stop stopColor='#FFF' offset='0%' />
-              <stop stopColor='#EAEAEA' offset='77.402%' />
-              <stop stopColor='#DFDFDF' offset='100%' />
-            </linearGradient>
-          </defs>
-          <g fill='url(#illustration-01)' fillRule='evenodd'>
-            <circle cx='1232' cy='128' r='128' />
-            <circle cx='155' cy='443' r='64' />
-          </g>
-        </svg>
-      </div>
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
-      <div className='max-w-4xl mx-auto px-4 sm:px-6'>
-        {/* Hero content */}
-        <div className='pt-32 pb-12 md:pt-40 md:pb-20'>
-          {/* Section header */}
-          <div className='text-center pb-12 md:pb-16'>
-            <h1
-              className='text-3xl sm:text-2xl md:text-4xl font-extrabold leading-snug tracking-tighter mb-4'
-              data-aos='zoom-y-out'
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleWatchVideo = () => {
+    setIsVideoModalOpen(true);
+  };
+
+  return (
+    <>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          {images.map((image, index) => (
+            <div
+              key={image.id}
+              className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
+                index === currentImageIndex ? "opacity-100" : "opacity-0"
+              }`}
+              style={{ backgroundImage: `url(${image.src})` }}
+            />
+          ))}
+        </div>
+
+        <div className="absolute inset-0 bg-black/70" />
+
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/40 via-orange-900/40 to-slate-900/40" />
+
+        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+          <h1 className="text-2xl md:text-4xl lg:text-5xl text-white  font-bold mb-6 animate-fade-in">
+            Empowering Growth,{" "}
+            <span className="bg-gradient-to-r from-teal-400 to-orange-500 bg-clip-text text-transparent">
+              Building Futures
+            </span>
+          </h1>
+
+          <p className="text-xl md:text-2xl mb-8 text-slate-200 max-w-3xl mx-auto animate-fade-in-delay">
+            Your partner in strategic project management, capacity building, and
+            community-focused development.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-delay-2">
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-white/30 text-white hover:bg-white/70 my-2 px-8 py-4 text-lg font-semibold transition-all duration-300 bg-transparent"
+              onClick={handleWatchVideo}
             >
-              <p>Build an Organization of High Repute,</p>
-              <div className='sm:flex sm:items-center sm:gap-2 sm:justify-center'>
-                <span className='bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400'>
-                  Immerse yourself in{" "}
-                </span>
-                <span className='block sm:inline-flex flex-col h-[calc(theme(fontSize.3xl)*theme(lineHeight.tight))] sm:h-[calc(theme(fontSize.2xl)*theme(lineHeight.tight))]  md:h-[calc(theme(fontSize.4xl)*theme(lineHeight.tight))] overflow-hidden'>
-                  <ul className='block animate-text-slide-3 text-center sm:text-left leading-tight [&_li]:block'>
-                    <li>Transferable skills</li>
-                    <li>In-Demand skills</li>
-                    <li>Marketable skillset</li>
-                    <li aria-hidden='true'>Transferable skills</li>
-                  </ul>
-                </span>{" "}
-              </div>
-              <span className='sm:block bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400'>
-                for Self Sustenance
-              </span>
-            </h1>
-            <div className='max-w-3xl mx-auto'>
-              {/* <p
-                className='text-xl text-gray-600 mb-8'
-                data-aos='zoom-y-out'
-                data-aos-delay='150'
-              >
-                Ask Us How.
-              </p> */}
-              <div
-                className='max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center'
-                data-aos='zoom-y-out'
-                data-aos-delay='300'
-              >
-                <ContactUs />
-              </div>
-            </div>
+              <Play className="mr-2 h-5 w-5" />
+              Watch Our Story
+            </Button>
           </div>
         </div>
-      </div>
-    </section>
+
+        <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentImageIndex(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentImageIndex
+                  ? "bg-white scale-110"
+                  : "bg-white/50 hover:bg-white/70"
+              }`}
+            />
+          ))}
+        </div>
+      </section>
+
+      <VideoModal
+        isOpen={isVideoModalOpen}
+        onClose={() => setIsVideoModalOpen(false)}
+        videoId="joBGwpaBzJ0"
+      />
+    </>
   );
 }
