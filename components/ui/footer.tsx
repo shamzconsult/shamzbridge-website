@@ -45,7 +45,7 @@ export default function Footer() {
             {/* Company Info */}
             <div className="space-y-4">
               <h3 className="font-serif text-xl font-bold">
-                Shamzbridge consult Limited.
+                Shamzbridge Consult Limited.
               </h3>
               <p className="opacity-90">
                 Empowering growth and building futures through strategic
