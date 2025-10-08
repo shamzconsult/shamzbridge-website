@@ -112,14 +112,14 @@ export default function HiringAdvert() {
                 }) => (
                   <div
                     key={_id}
-                    className="bg-slate-100 hover:bg-slate-100/80 p-[24px] rounded-[12px] min-[450px]:flex justify-between items-center text-center min-[450px]:text-left"
+                    className="bg-slate-100 hover:bg-slate-100/80 p-[24px] rounded-[12px] min-[450px]:flex justify-between items-start  min-[450px]:text-left"
                   >
                     <div className="flex flex-col gap-1">
                       <div className="flex flex-col gap-2">
                         <p className="font-medium md:text-2xl text-slate-700 font-sans">
                           {title}
                         </p>
-                        <ul className="text-sm mb-6 sm:mb-4 flex gap-8 list-disc px-4 justify-center min-[450px]:justify-start text-slate-500">
+                        <ul className="text-sm mb-6 sm:mb-4 flex gap-8 list-disc px-4  min-[450px]:justify-start text-slate-500">
                           <li className="font-medium md:text-lg marker:text-orange-500">
                             {type}
                           </li>
@@ -133,14 +133,14 @@ export default function HiringAdvert() {
                           )}
                         </ul>
                       </div>
-                      <div className="flex flex-col justify-center gap-10 sm:flex-row sm:justify-start">
-                        <div className="flex flex-col items-center text-sm text-slate-400 sm:flex-row">
+                      <div className="flex flex-col  gap-10 sm:justify-start">
+                        <div className="flex items-center text-sm text-slate-400 sm:flex-row">
                           <span className="mr-3 w-1.5 h-1.5 bg-orange-500 rounded-full hidden sm:flex"></span>
                           <time>Posted:</time>
                           <time>{dayjs(createdAt).fromNow()}</time>
                         </div>
                         {description && description.trim() !== "" && (
-                          <div className="mb-4">
+                          <div className="">
                             <h4 className="font-medium text-slate-700 text-sm mb-2">
                               Description:
                             </h4>
@@ -163,7 +163,7 @@ export default function HiringAdvert() {
                           </div>
                         ) : null}
                         {isActive && closing ? (
-                          <div className="flex flex-col items-center text-sm text-slate-400 sm:flex-row">
+                          <div className="flex  items-center text-sm text-slate-400 sm:flex-row">
                             <span className="mr-3 w-1.5 h-1.5 bg-blue-500 rounded-full hidden sm:flex"></span>
                             <p>Deadline:</p>
                             <p>{closing}</p>
@@ -171,7 +171,7 @@ export default function HiringAdvert() {
                         ) : null}
                       </div>
                     </div>
-                    <div className="flex justify-center items-center mt-3 min-[450px]:mt-0">
+                    <div className="flex justify-center items-center mt-3 ">
                       {isActive ? (
                         <button
                           data-tally-open={formId}
@@ -179,7 +179,7 @@ export default function HiringAdvert() {
                           data-tally-width="700"
                           data-tally-emoji-text="👋"
                           data-tally-emoji-animation="wave"
-                          className="rounded-full px-2 py-3 w-28 text-sm bg-orange-600 text-slate-50 hover:bg-orange-500 duration-200 font-semibold"
+                          className="rounded-xl px-2 py-2 w-full  md:w-28 text-sm bg-orange-600 text-slate-50 hover:bg-orange-500 duration-200 font-semibold"
                         >
                           Apply Now
                         </button>
@@ -187,7 +187,7 @@ export default function HiringAdvert() {
                         <button
                           title="Application closed."
                           disabled
-                          className="rounded-full px-2 py-3 w-28 bg-slate-400 cursor-not-allowed text-white duration-200 font-medium"
+                          className="rounded-xl px-2 py-2 w-full md:w-28 bg-slate-400 cursor-not-allowed text-white duration-200 font-medium"
                         >
                           Closed
                         </button>
