@@ -133,7 +133,7 @@ export default function HiringAdvert() {
                           )}
                         </ul>
                       </div>
-                      <div className="flex flex-col  gap-10 sm:justify-start">
+                      <div className="flex flex-col max-w-4xl  gap-10 sm:justify-start">
                         <div className="flex items-center text-sm text-slate-400 sm:flex-row">
                           <span className="mr-3 w-1.5 h-1.5 bg-orange-500 rounded-full hidden sm:flex"></span>
                           <time>Posted:</time>
@@ -141,21 +141,21 @@ export default function HiringAdvert() {
                         </div>
                         {description && description.trim() !== "" && (
                           <div className="">
-                            <h4 className="font-medium text-slate-700 text-sm mb-2">
+                            <h4 className="font-medium text-slate-700 text-base mb-2">
                               Description:
                             </h4>
-                            <p className="text-sm text-slate-600">
+                            <p className="text-base text-slate-600 ">
                               {description}
                             </p>
                           </div>
                         )}
 
                         {requirements.length > 0 ? (
-                          <div className="flex flex-col gap-2">
-                            <h4 className="font-medium text-slate-700 text-sm">
+                          <div className="flex flex-col text-base gap-2">
+                            <h4 className="font-medium text-slate-700 ">
                               Requirements
                             </h4>
-                            <ul className="text-sm text-slate-600 list-disc pl-4 space-y-1">
+                            <ul className=" text-slate-600 list-disc pl-4 space-y-1">
                               {requirements.map((requirement, index) => (
                                 <li key={index}>{requirement}</li>
                               ))}
