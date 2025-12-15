@@ -34,6 +34,10 @@ const PUT = async (
       newType: type,
       newMode: mode,
       newLocation: location,
+      newFormId: formId,
+      newClosing: closing,
+      newRequirements: requirements,
+      newDescription: description,
       newIsActive: isActive,
     } = await request.json();
 
@@ -46,6 +50,10 @@ const PUT = async (
         type,
         mode,
         location,
+        formId,
+        closing,
+        requirements,
+        description,
         isActive,
       },
       { new: true }
