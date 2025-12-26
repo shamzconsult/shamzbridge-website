@@ -150,7 +150,7 @@ export default function Footer() {
                 <a
                   target="_blank"
                   rel="noreferrer noopener"
-                  href="https://www.instagram.com/shamzbridge/"
+                  href="https://www.instagram.com/shamzbridge_05/"
                   className="flex justify-center items-center text-gray-600 hover:text-gray-900 bg-white rounded-full shadow transition duration-150 ease-in-out"
                   aria-label="instagram"
                 >
