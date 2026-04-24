@@ -61,5 +61,5 @@ export const teamMembers: TeamMember[] = [
     expertise: ["Administrative Support", "Organization", "Communication", "Time Management"],
     email: "nasibahshafii4@gmail.Com",
     image: "/team/nasibah.jpeg"
-  },
+}
 ]
