@@ -12,6 +12,7 @@ const navigationItems = [
   { href: "/#services", label: "Services" },
   { href: "/#testimonial", label: "Testimonials" },
   { href: "/careers", label: "Careers" },
+  { href: "/teams", label: "Teams" },
 ]
 
 export default function Header() {
