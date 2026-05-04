@@ -25,6 +25,7 @@ export default function Header() {
     { name: "Events", href: "/events" },
     { name: "Testimonials", href: "/#testimonial" },
     { name: "Careers", href: "/careers" },
+    { name: "Teams", href: "/team" },
   ];
 
   useEffect(() => {
