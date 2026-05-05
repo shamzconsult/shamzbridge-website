@@ -18,7 +18,7 @@ export default function Teams() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FCFAF8] selection:bg-orange-500/20">
+    <div className="min-h-screen selection:bg-orange-500/20">
       <main className="max-w-7xl mx-auto px-6 pt-40 pb-32">
         <div className="max-w-3xl mb-12 md:mb-24">
           <span className="inline-block px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-[10px] font-bold uppercase tracking-widest mb-4 md:mb-6">
@@ -42,7 +42,7 @@ export default function Teams() {
         {/* Featured MD Card */}
         <div className="mb-32">
           <div className="bg-white luxury-shadow rounded-[3rem] overflow-hidden border border-black/5 flex flex-col lg:flex-row hover:border-orange-200 transition-colors duration-500">
-            <div className="lg:w-1/2 relative h-[400px] lg:h-auto overflow-hidden">
+            <div className="lg:w-1/2 relative overflow-hidden">
               <img
                 src={md.image}
                 alt={md.name}
@@ -52,17 +52,17 @@ export default function Teams() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
             </div>
 
-            <div className="lg:w-1/2 p-12 lg:p-20 flex flex-col justify-center">
-              <span className="text-orange-600 font-bold text-xs uppercase tracking-[0.3em] mb-4">
+            <div className="lg:w-1/2 p-6 lg:p-10 flex flex-col justify-center">
+              <span className="text-orange-600 font-bold text-base uppercase tracking-[0.3em] backdrop-blur-sm">
                 Leadership
               </span>
-              <h2 className="text-2xl md:text-5xl font-display font-bold text-black mb-4">
+              <h2 className="text-2xl md:text-5xl font-display font-bold text-black mb-2">
                 {md.name}
               </h2>
-              <p className="text-xl font-medium text-black/40 mb-8 border-l-4 border-orange-500 pl-6">
+              <p className="text-lg font-medium text-black/40 mb-5 border-l-4 border-orange-500 pl-6">
                 {md.role}
               </p>
-              <p className="text-lg text-black/60 leading-relaxed mb-10">{md.bio}</p>
+              <p className="text-lg text-black/60 leading-relaxed mb-5">{md.bio}</p>
 
               <div className="space-y-8">
                 <div>
@@ -102,7 +102,7 @@ export default function Teams() {
             Technical Core
             <div className="h-px w-24 bg-orange-200" />
           </h3>
-          <p className="text-black/40 text-md md:text-3xl font-semibold uppercase tracking-widest">
+          <p className="text-black/40 text-base md:text-lg font-semibold uppercase tracking-widest">
             {teamMembers.length} Specialists
           </p>
         </div>
