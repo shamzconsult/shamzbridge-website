@@ -41,7 +41,7 @@ export default function Teams() {
 
         {/* Featured MD Card */}
         <div className="mb-32">
-          <div className="bg-white luxury-shadow rounded-[3rem] overflow-hidden border border-black/5 flex flex-col lg:flex-row hover:border-orange-200 transition-colors duration-500">
+          <div className="bg-white h-full luxury-shadow rounded-[3rem] overflow-hidden border border-black/5 flex flex-col lg:flex-row hover:border-orange-200 transition-colors duration-500">
             <div className="lg:w-1/2 relative overflow-hidden">
               <img
                 src={md.image}
@@ -53,7 +53,7 @@ export default function Teams() {
             </div>
 
             <div className="lg:w-1/2 p-6 lg:p-10 flex flex-col justify-center">
-              <span className="text-orange-600 font-bold text-base uppercase tracking-[0.3em] backdrop-blur-sm">
+                <span className="text-orange-600 font-bold text-base uppercase tracking-[0.3em] backdrop-blur-sm">
                 Leadership
               </span>
               <h2 className="text-2xl md:text-5xl font-display font-bold text-black mb-2">
