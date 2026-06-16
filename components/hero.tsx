@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Play } from "lucide-react";
+import { Book, Play } from "lucide-react";
 import { useState, useEffect } from "react";
 import { images } from "./carousel/slider-images";
 import VideoModal from "./Video-modal";
@@ -62,6 +62,21 @@ export default function Hero() {
             >
               <Play className="mr-2 h-5 w-5" />
               Watch Our Story
+            </Button>
+            <Button
+              asChild
+              variant="default"
+              size="lg"
+              className="bg-white text-black hover:bg-gray-200 hover:text-black shadow-xl shadow-black/30 my-2 px-8 py-4 text-lg font-semibold transition-all duration-300 border border-white/20"
+            >
+              <a
+                href="/shamzbridge-profile.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Book className="mr-2 h-5 w-5" />
+                View Our Profile
+              </a>
             </Button>
           </div>
         </div>

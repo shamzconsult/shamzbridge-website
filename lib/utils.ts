@@ -55,7 +55,7 @@ export const teamMembers: TeamMember[] = [
 },
   {
     id: "4",
-    name: "Shafii Nassibah",
+    name: "Shafii Nasibah",
     role: "Administrative Intern",
     bio: "Shafii Nassibah is a proactive Administrative Intern who keeps Shamzbridge's daily operations running smoothly. She manages schedules, organizes documentation, and coordinates team communications with precision and a willingness to learn. Her strong organizational skills and positive attitude make her an indispensable support to the administration team.",
     expertise: ["Administrative Support", "Organization", "Communication", "Time Management"],

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Logo from "./logo";
 
 interface NavItem {
@@ -16,6 +17,8 @@ export default function Header() {
   const [showHeader, setShowHeader] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const pathname = usePathname();
+  const isTeamPage = pathname === "/team";
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -26,9 +29,12 @@ export default function Header() {
     { name: "Testimonials", href: "/#testimonial" },
     { name: "Careers", href: "/careers" },
     { name: "Teams", href: "/team" },
+    { name: "Contact", href: "/contact" },
   ];
 
   useEffect(() => {
+    if (isTeamPage) return;
+
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       setIsScrolled(scrollPosition > 10);
@@ -51,7 +57,7 @@ export default function Header() {
       }
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isTeamPage]);
 
   useEffect(() => {
     if (isOpen) {
@@ -88,10 +94,12 @@ export default function Header() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -100, opacity: 0 }}
             transition={{ duration: 0.7, ease: "easeInOut" }}
-            className={`fixed top-0 left-0 w-full z-50  transition-all duration-300 ${
-              isScrolled
-                ? "bg-[#1e1e1e] text-gray-300 hover:text-gray-50 bg-opacity-95 backdrop-blur-sm  z-20 "
-                : "text-white "
+            className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+              isTeamPage
+                ? "bg-[#1e1e1e] text-gray-300 hover:text-gray-50 bg-opacity-95 backdrop-blur-sm z-20"
+                : isScrolled
+                  ? "bg-[#1e1e1e] text-gray-300 hover:text-gray-50 bg-opacity-95 backdrop-blur-sm z-20"
+                  : "text-white"
             }`}
           >
             <div className="max-w-7xl mx-auto px-5 sm:px-0">
@@ -128,7 +136,7 @@ export default function Header() {
                     ) : (
                       <Menu
                         size={24}
-                        className={isScrolled ? "text-gray-600" : "text-white"}
+                        className={isTeamPage || isScrolled ? "text-gray-600" : "text-white"}
                       />
                     )}
                   </button>

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Header from "@/components/ui/header";
 import TallyScript from "@/components/ui/TallyScript";
 import { GoogleAnalytics } from "@/components/scripts/GoogleAnalytics";
+import NecaFlierPopup from "@/components/neca-flier-popup";
 import type { Metadata } from "next";
 
 const inter = Inter({
@@ -43,6 +44,7 @@ export default function RootLayout({
           <Header />
           <TallyScript />
           <GoogleAnalytics />
+          <NecaFlierPopup />
           {children}
         </div>
       </body>
