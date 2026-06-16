@@ -29,6 +29,7 @@ export default function Header() {
     { name: "Testimonials", href: "/#testimonial" },
     { name: "Careers", href: "/careers" },
     { name: "Teams", href: "/team" },
+    { name: "Contact", href: "/contact" },
   ];
 
   useEffect(() => {

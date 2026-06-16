@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, CheckCircle, Target } from "lucide-react";
+import { Book, Calendar, CheckCircle, Target } from "lucide-react";
 import Link from "next/link";
 import * as Icons from "lucide-react";
 
@@ -145,14 +145,26 @@ export default function ServiceClient({ service }: { service: Service }) {
                   services can help your organization achieve its goals.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <a
+                  {/* <a
                     href="mailto:shamzbridgeconsult@gmail.com?subject=Contacting%20you%20about%20hiring%20service%20with%20Shamzbridge&body=Hi, %0D%0A%0D%0A"
                     target="_blank"
                     rel="noreferrer noopener"
                     className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-2 rounded-md font-medium text-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
                   >
                     Contact Us Today
-                  </a>
+                  </a> */}
+
+                  <Link href="/shamzbridge-profile.pdf" target="_blank" rel="noopener noreferrer">
+                    <Button
+                      // asChild
+                      variant="default"
+                      size="lg"
+                      className=" flex bg-orange-600 hover:bg-orange-800 text-white  px-6 py-2 rounded-md font-medium text-base transition-colors duration-200 shadow-lg hover:shadow-xl"
+                    >
+                        <Book className="mr-2 h-5 w-5" />
+                        View Our Profile
+                    </Button>
+                  </Link>
                   <Link href="/services">
                     <Button
                       variant="outline"
