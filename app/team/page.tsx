@@ -41,7 +41,7 @@ export default function Teams() {
 
         {/* Featured MD Card */}
         <div className="mb-32">
-          <div className="bg-white h-full luxury-shadow rounded-[3rem] overflow-hidden border border-black/5 flex flex-col lg:flex-row hover:border-orange-200 transition-colors duration-500">
+          <div className="bg-white h- [180px] luxury-shadow rounded-[3rem] overflow-hidden border border-black/5 flex flex-col lg:flex-row hover:border-orange-200 transition-colors duration-500">
             <div className="lg:w-1/2 relative overflow-hidden">
               <img
                 src={md.image}
@@ -56,13 +56,13 @@ export default function Teams() {
                 <span className="text-orange-600 font-bold text-base uppercase tracking-[0.3em] backdrop-blur-sm">
                 Leadership
               </span>
-              <h2 className="text-2xl md:text-5xl font-display font-bold text-black mb-2">
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-black mb-2">
                 {md.name}
               </h2>
               <p className="text-lg font-medium text-black/40 mb-5 border-l-4 border-orange-500 pl-6">
                 {md.role}
               </p>
-              <p className="text-lg text-black/60 leading-relaxed mb-5">{md.bio}</p>
+              <p className="text-md text-black/70 leading-relaxed mb-5">{md.bio}</p>
 
               <div className="space-y-8">
                 <div>
@@ -98,11 +98,11 @@ export default function Teams() {
 
         {/* Technical Core Section */}
         <div className="mb-12 flex items-center justify-between">
-          <h3 className="text-md md:text-3xl font-display font-bold text-black flex items-center gap-4">
+          <h3 className="text-md md:text-2xl font-display font-bold text-black flex items-center gap-4">
             Technical Core
             <div className="h-px w-24 bg-orange-200" />
           </h3>
-          <p className="text-black/40 text-base md:text-lg font-semibold uppercase tracking-widest">
+          <p className="text-black/40 text-base md:text-md font-semibold uppercase tracking-widest">
             {teamMembers.length} Specialists
           </p>
         </div>
