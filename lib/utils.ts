@@ -17,11 +17,11 @@ export interface TeamMember {
 
 export const managingDirector: TeamMember = {
   id: "md",
-  name: "Shamsudeen Aderoju",
+  name: "Shamsudeen Adedapo",
   role: "Program Manager",
-  bio: "Shamsudeen Adedapo Aderoju is a seasoned Program Manager with over a decade of experience designing and delivering high-impact initiatives across Nigeria. At Shamzbridge Consult, he leads program strategy and execution, aligning teams, managing stakeholders, and driving projects that promote leadership development and sustainable community impact. He brings strong expertise in learning and development, talent management, and facilitation, with a proven track record of leading workshops on leadership, communication, and nation-building. A JCI Nigeria Certified Trainer and alumnus of the British Council’s Leaders for Tomorrow program, he is passionate about raising the next generation of leaders and advancing meaningful social change.",
+  bio: "Shamsudeen Adedapo is a seasoned Program Manager with over a decade of experience designing and delivering high-impact initiatives across Nigeria. At Shamzbridge Consult, he leads program strategy and execution, aligning teams, managing stakeholders, and driving projects that promote leadership development and sustainable community impact. He brings strong expertise in learning and development, talent management, and facilitation, with a proven track record of leading workshops on leadership, communication, and nation-building. A JCI Nigeria Certified Trainer and alumnus of the British Council’s Leaders for Tomorrow program, he is passionate about raising the next generation of leaders and advancing meaningful social change.",
   expertise: ["Project Management", "Event Management", "Leadership", "Business Development"],
-  email: "shamsudeenaderojo@gmail.com",
+  email: "shamzbridgeconsult@gmail.com",
   image: "/team/shams.png"
 }
 
