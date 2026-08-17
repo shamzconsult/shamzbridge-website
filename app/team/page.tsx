@@ -28,7 +28,7 @@ export default function Teams() {
                 src={md.image}
                 alt={md.name}
                 referrerPolicy="no-referrer"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
             </div>
@@ -101,7 +101,7 @@ export default function Teams() {
                   src={member.image}
                   alt={member.name}
                   referrerPolicy="no-referrer"
-                  className="absolute inset-0 w-full h-full  md:object-cover grayscale-0 group-hover:grayscale transition-all duration-500 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover object-top grayscale-0 group-hover:grayscale transition-all duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent sm:bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
