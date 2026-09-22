@@ -1,42 +1,9 @@
-/* ==========================================================================
-   MENTORSHIP FEEDBACK PORTAL — Tailwind source
-   ==========================================================================
-   This is the portal's original stylesheet, unchanged apart from the import
-   line and the @source block below.
 
-   The portal is built with Tailwind v4; the marketing site is on v3. Rather
-   than translate one to the other — which moved shadows, radii and gradient
-   interpolation, and changed how the portal rendered — each keeps its own
-   Tailwind. This file is compiled by the v4 CLI into portal.css, which is what
-   the portal's layout imports:
-
-       npm run portal:css          once
-       npm run portal:css:watch    while working on the portal
-
-   "tailwindcss4" is an npm alias for tailwindcss@4 (see package.json). The
-   bare name resolves to the v3 copy the site's PostCSS pipeline uses, so the
-   alias is how this file reaches v4.
-   ========================================================================== */
 @import "tailwindcss4" source(none);
 
-/* ==========================================================================
-   SOURCES
-   ==========================================================================
-   Standalone, this file sat at the root of its own project and Tailwind found
-   the source files by itself. Here it shares a repo with the marketing site,
-   so the scan is limited to the portal's own code — otherwise the site's
-   class names would generate utilities in the portal's stylesheet.
-
-   Paths are relative to this file: "." is app/(portal).
-   ========================================================================== */
 @source "./**/*.{ts,tsx}";
 @source "../../mentorship/**/*.{ts,tsx}";
 
-/* ==========================================================================
-   DESIGN TOKENS
-   Brand: Shamzbridge orange (primary) + a teal accent used for the mentee
-   experience, over a deep "ink" navy canvas.
-   ========================================================================== */
 @theme {
   --color-brand-50: #fff5ed;
   --color-brand-100: #ffe8d5;
@@ -110,9 +77,6 @@
   }
 }
 
-/* ==========================================================================
-   BASE
-   ========================================================================== */
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;

@@ -63,6 +63,7 @@
     "dotenv": "^17.4.2",
     "eslint": "9.39.4",
     "eslint-config-next": "16.2.4",
+    "lightningcss": "^1.32.0",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.3.6",
     "tailwindcss4": "npm:tailwindcss@^4.3.3"
