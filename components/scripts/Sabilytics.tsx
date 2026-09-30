@@ -5,7 +5,7 @@ export const Sabilytics = () => {
   return (
     <Script
       async
-      src="https://sabilytics.vercel.app/script.js"
+      src="https://sabilytics.com/script.js"
       data-site="rd9mnc0rw4x1"
       data-domain="shamzbridgeconsult.org"
       strategy="afterInteractive"
