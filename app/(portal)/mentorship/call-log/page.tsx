@@ -5,6 +5,8 @@ import { CalendarDays, Check, PhoneCall, Save } from "lucide-react-v1";
 
 import { FormActions, FormBanner, Panel, SuccessScreen } from "@/mentorship/components/FormShell";
 import { MentorPicker } from "@/mentorship/components/MentorPicker";
+import { useOtpVerification } from "@/mentorship/components/OtpVerification";
+import { OTP_HEADER } from "@/mentorship/lib/otp-shared";
 import { SiteFooter, SiteHeader } from "@/mentorship/components/SiteHeader";
 import { StatusMessage } from "@/mentorship/components/StatusMessage";
 import { StudentCombobox } from "@/mentorship/components/StudentCombobox";
@@ -25,13 +27,6 @@ type Status = "idle" | "submitting" | "error" | "success";
 
 const ACCENT_KEY = "ink" as const;
 
-/**
- * "We spoke." Date, mode, one short note — that is the whole form.
- *
- * Mentors fill this after every call, so it deliberately stays lighter than
- * the monthly report: no file uploads, no per-question sections, and it
- * remembers who you are between entries so logging a second call is two taps.
- */
 export default function CallLogPage() {
   const [role, setRole] = useState<Role>("mentor");
   const [mentorId, setMentorId] = useState("");
@@ -46,15 +41,14 @@ export default function CallLogPage() {
   /** Set when the entry was saved but its email notification failed. */
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
+  const { verify, otpDialog } = useOtpVerification();
   const [lastLogged, setLastLogged] = useState<{ mentor: string; mentees: string[] } | null>(null);
 
   const mentor = getMentorById(mentorId);
   const group = useMemo(() => (mentor ? getStudentsInGroup(mentor.groupId) : []), [mentor]);
   const menteeMentor = mentee ? getMentorForStudent(mentee) : undefined;
 
-  /* ---- What counts as a complete entry ---------------------------------
-   * Only the pair and the date are needed. Mode and note are optional, so a
-   * call can be logged in two taps and annotated later. */
+
   const partyChosen =
     role === "mentor" ? Boolean(mentorId) && menteeIds.length > 0 : Boolean(mentee);
   const canSubmit = partyChosen && status !== "submitting";
@@ -69,16 +63,23 @@ export default function CallLogPage() {
     event.preventDefault();
     if (!canSubmit) return;
 
+    // Prove the selected person is the one logging: a code goes to their
+    // roster email and the entry only proceeds once it is entered.
+    const personId = role === "mentor" ? mentorId : mentee?.id;
+    if (!personId) return;
+    const ticket = await verify(role, personId);
+    if (!ticket) return;
+
     setStatus("submitting");
     setError("");
 
     try {
       const response = await fetch("/api/call-log", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", [OTP_HEADER]: ticket },
         body: JSON.stringify({
           loggedBy: role,
-          personId: role === "mentor" ? mentorId : mentee?.id,
+          personId,
           counterpartIds: role === "mentor" ? menteeIds : undefined,
           callDate,
           mode,
@@ -113,7 +114,6 @@ export default function CallLogPage() {
     setError("");
   }
 
-  /* ====================================================================== */
   if (status === "success") {
     return (
       <SuccessScreen
@@ -421,6 +421,8 @@ export default function CallLogPage() {
           />
         </form>
       </main>
+
+      {otpDialog}
 
       <SiteFooter />
     </>

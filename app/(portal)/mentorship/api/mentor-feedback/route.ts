@@ -12,6 +12,7 @@ import {
 import { db, isDbConfigured, record } from "@/mentorship/lib/db";
 import { mentorReportEmail, type MentorReportEmail } from "@/mentorship/lib/email-templates";
 import { FEEDBACK_INBOX, deliver, isMailConfigured } from "@/mentorship/lib/mail";
+import { requireVerifiedSender } from "@/mentorship/lib/otp";
 import { prepareResources } from "@/mentorship/lib/uploads";
 
 export const runtime = "nodejs";
@@ -40,11 +41,13 @@ export async function POST(request: Request) {
     return fail("We could not read your submission. Please try again.", 400);
   }
 
-  /* ---- Mentor ---------------------------------------------------------- */
   const mentor = getMentorById(String(form.get("mentorId") ?? ""));
   if (!mentor) return fail("Please select your name from the mentor list.", 400);
 
-  /* ---- Session date ---------------------------------------------------- */
+  // Only the person whose roster email received the code may submit as them.
+  const denied = await requireVerifiedSender(request, "mentor", mentor.id);
+  if (denied) return denied;
+
   const sessionDate = String(form.get("sessionDate") ?? "").trim();
   if (!/^\d{4}-\d{2}-\d{2}$/.test(sessionDate)) {
     return fail("Please choose a valid session date.", 400);

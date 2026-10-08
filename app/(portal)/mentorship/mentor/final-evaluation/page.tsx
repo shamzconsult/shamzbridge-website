@@ -6,6 +6,8 @@ import { Award, ChevronDown, Send } from "lucide-react-v1";
 import { FormActions, FormBanner, Panel, SuccessScreen } from "@/mentorship/components/FormShell";
 import { LikertGrid, allRated, ratedCount } from "@/mentorship/components/LikertGrid";
 import { MentorPicker } from "@/mentorship/components/MentorPicker";
+import { useOtpVerification } from "@/mentorship/components/OtpVerification";
+import { OTP_HEADER } from "@/mentorship/lib/otp-shared";
 import { SiteFooter, SiteHeader } from "@/mentorship/components/SiteHeader";
 import { StatusMessage } from "@/mentorship/components/StatusMessage";
 import { ACCENT } from "@/mentorship/components/accents";
@@ -40,6 +42,7 @@ export default function MentorFinalEvaluationPage() {
   /** Set when the entry was saved but its email notification failed. */
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
+  const { verify, otpDialog } = useOtpVerification();
   const [result, setResult] = useState<{ menteeCount: number; overallAverage: number | null } | null>(
     null,
   );
@@ -88,13 +91,18 @@ export default function MentorFinalEvaluationPage() {
     event.preventDefault();
     if (!mentor) return;
 
+    // Prove the selected person is the one submitting: a code goes to their
+    // roster email and the form only proceeds once it is entered.
+    const ticket = await verify("mentor", mentor.id);
+    if (!ticket) return;
+
     setStatus("submitting");
     setError("");
 
     try {
       const response = await fetch("/api/final-evaluation", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", [OTP_HEADER]: ticket },
         body: JSON.stringify({
           role: "mentor",
           personId: mentor.id,
@@ -363,6 +371,8 @@ export default function MentorFinalEvaluationPage() {
           />
         </form>
       </main>
+
+      {otpDialog}
 
       <SiteFooter />
     </>

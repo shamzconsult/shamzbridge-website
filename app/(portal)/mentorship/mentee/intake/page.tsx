@@ -9,6 +9,8 @@ import { QuestionFields, allAnswered, answeredCount } from "@/mentorship/compone
 import { SiteFooter, SiteHeader } from "@/mentorship/components/SiteHeader";
 import { StatusMessage } from "@/mentorship/components/StatusMessage";
 import { StudentCombobox } from "@/mentorship/components/StudentCombobox";
+import { useOtpVerification } from "@/mentorship/components/OtpVerification";
+import { OTP_HEADER } from "@/mentorship/lib/otp-shared";
 import { MENTEE_INTAKE_QUESTIONS } from "@/mentorship/data/forms";
 import {
   HOST_COMPANY,
@@ -27,6 +29,7 @@ export default function MenteeIntakePage() {
   /** Set when the entry was saved but its email notification failed. */
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
+  const { verify, otpDialog } = useOtpVerification();
 
   const mentor = student ? getMentorForStudent(student) : undefined;
   // Every question is optional. `complete` only drives the gentle reminder
@@ -34,11 +37,6 @@ export default function MenteeIntakePage() {
   const complete = allAnswered(MENTEE_INTAKE_QUESTIONS, answers);
   const answered = answeredCount(MENTEE_INTAKE_QUESTIONS, answers);
 
-  /**
-   * Picking a name asks the server whether that mentee has already submitted.
-   * The lock is enforced server-side too; this just saves someone typing out
-   * four answers before finding out they will be refused.
-   */
   function choose(next: Student | null) {
     setStudent(next);
     setStatus("idle");
@@ -55,13 +53,18 @@ export default function MenteeIntakePage() {
     event.preventDefault();
     if (!student) return;
 
+    // Prove the selected person is the one submitting: a code goes to their
+    // roster email and the form only proceeds once it is entered.
+    const ticket = await verify("mentee", student.id);
+    if (!ticket) return;
+
     setStatus("submitting");
     setError("");
 
     try {
       const response = await fetch("/api/intake", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", [OTP_HEADER]: ticket },
         body: JSON.stringify({ role: "mentee", personId: student.id, answers }),
       });
       const result = await response.json().catch(() => ({}));
@@ -195,6 +198,8 @@ export default function MenteeIntakePage() {
           )}
         </form>
       </main>
+
+      {otpDialog}
 
       <SiteFooter />
     </>

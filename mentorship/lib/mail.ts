@@ -45,8 +45,35 @@ export const MAIL_FROM_NAME = env("MAIL_FROM_NAME") || PROGRAM.name;
  * here: sending from a Gmail address is something a domain-based provider can
  * never be made to do.
  */
-const BREVO_API_KEY = env("BREVO_API_KEY");
+/**
+ * Brevo issues two kinds of key, and both are used:
+ *
+ *   BREVO_API_KEY   "xkeysib-..."   the HTTPS API (first choice)
+ *   BREVO_SMTP_KEY  "xsmtpsib-..."  Brevo's SMTP relay (second choice)
+ *
+ * Each only works for its own route - the API answers an SMTP key with "Key
+ * not found" - so keys are sorted by their prefix rather than by which
+ * variable they were pasted into. Swapped labels still work.
+ */
+const BREVO_KEYS = [env("BREVO_API_KEY"), env("BREVO_SMTP_KEY")].filter(Boolean);
+const BREVO_API_KEY = BREVO_KEYS.find((key) => !key.startsWith("xsmtpsib-")) ?? "";
+const BREVO_SMTP_KEY = BREVO_KEYS.find((key) => key.startsWith("xsmtpsib-")) ?? "";
+
+/**
+ * The relay login is account-specific ("123abc001@smtp-brevo.com", shown under
+ * SMTP & API -> SMTP in Brevo). When BREVO_SMTP_LOGIN is not set it is looked
+ * up from the account with the API key.
+ */
+const BREVO_SMTP_LOGIN = env("BREVO_SMTP_LOGIN");
+const BREVO_SMTP_HOST = env("BREVO_SMTP_HOST") || "smtp-relay.brevo.com";
+const BREVO_SMTP_PORT = Number(env("BREVO_SMTP_PORT") || 587);
+
 const MAIL_FROM_ADDRESS = env("MAIL_FROM_ADDRESS") || SMTP_USER;
+
+const hasBrevoApi = () => Boolean(BREVO_API_KEY && MAIL_FROM_ADDRESS);
+const hasBrevoSmtp = () =>
+  Boolean(BREVO_SMTP_KEY && MAIL_FROM_ADDRESS && (BREVO_SMTP_LOGIN || BREVO_API_KEY));
+const hasGmailSmtp = () => Boolean(SMTP_USER && SMTP_PASS);
 
 /**
  * Raised once every configured route has been tried, carrying one reason per
@@ -64,8 +91,7 @@ export class DeliveryError extends Error {
 export const FEEDBACK_INBOX = env("FEEDBACK_INBOX") || HOST_COMPANY.email;
 
 export function isMailConfigured() {
-  if (BREVO_API_KEY && MAIL_FROM_ADDRESS) return true;
-  return Boolean(SMTP_USER && SMTP_PASS);
+  return hasBrevoApi() || hasBrevoSmtp() || hasGmailSmtp();
 }
 
 /** What the transport is pointed at, for the admin health strip. */
@@ -187,6 +213,7 @@ export function describeMailError(error: unknown): string {
       "Verification switched on. Generate a fresh one and redeploy."
     );
   }
+  if (isCertificateError(error)) return CERTIFICATE_ADVICE(SMTP_HOST);
   if (isTransient(error)) {
     const advice = BREVO_API_KEY
       ? "Brevo is configured but also failed - its reason is the one to act on."
@@ -321,10 +348,15 @@ async function sendViaBrevo(input: SendMailInput) {
       textContent: input.text,
       htmlContent: input.html,
       // Brevo takes base64 under `content`, and names the file with `name`.
-      attachment: input.attachments?.map((attachment) => ({
-        name: attachment.filename,
-        content: attachment.content.toString("base64"),
-      })),
+      // An empty list is refused outright ("attachment is missing"), and forms
+      // without files pass one, so the field is only sent when there is a file.
+      attachment:
+        input.attachments && input.attachments.length > 0
+          ? input.attachments.map((attachment) => ({
+              name: attachment.filename,
+              content: attachment.content.toString("base64"),
+            }))
+          : undefined,
     }),
     signal: AbortSignal.timeout(20_000),
   });
@@ -383,6 +415,13 @@ function describeBrevoError(error: unknown): string {
       "Brevo emails to it."
     );
   }
+  if (lower.includes("ip address") || lower.includes("unrecognised ip") || lower.includes("unrecognized ip")) {
+    return (
+      `Brevo refused this server's IP address: ${message} Brevo only accepts calls from its ` +
+      "Authorised IPs list. Hosting platforms use changing IPs, so deactivate the restriction " +
+      "at https://app.brevo.com/security/authorised_ips (or add this server's IP there)."
+    );
+  }
   if (error.status === 401) {
     return `Brevo rejected the API key: ${message}`;
   }
@@ -425,6 +464,84 @@ async function sendViaSmtp(input: SendMailInput) {
   throw lastError;
 }
 
+/* --------------------------------------------------------------------------
+ * BREVO SMTP RELAY - the SMTP key's route
+ * ------------------------------------------------------------------------*/
+
+let brevoLogin: Promise<string> | null = null;
+
+/** BREVO_SMTP_LOGIN, or the relay login looked up from the account once. */
+function brevoSmtpLogin(): Promise<string> {
+  if (BREVO_SMTP_LOGIN) return Promise.resolve(BREVO_SMTP_LOGIN);
+  if (!brevoLogin) {
+    brevoLogin = fetch("https://api.brevo.com/v3/account", {
+      headers: { "api-key": BREVO_API_KEY, Accept: "application/json" },
+      signal: AbortSignal.timeout(10_000),
+    })
+      .then(async (response) => {
+        const account = (await response.json()) as { relay?: { data?: { userName?: string } } };
+        const login = account.relay?.data?.userName;
+        if (!response.ok || !login) {
+          throw new Error("Could not look up the Brevo SMTP login. Set BREVO_SMTP_LOGIN.");
+        }
+        return login;
+      })
+      .catch((error) => {
+        brevoLogin = null;
+        throw error;
+      });
+  }
+  return brevoLogin;
+}
+
+let brevoTransport: Transporter | null = null;
+
+async function sendViaBrevoSmtp(input: SendMailInput) {
+  if (!brevoTransport) {
+    brevoTransport = nodemailer.createTransport({
+      host: BREVO_SMTP_HOST,
+      port: BREVO_SMTP_PORT,
+      secure: BREVO_SMTP_PORT === 465,
+      requireTLS: BREVO_SMTP_PORT !== 465,
+      auth: { user: await brevoSmtpLogin(), pass: BREVO_SMTP_KEY },
+      connectionTimeout: 15_000,
+      greetingTimeout: 15_000,
+      socketTimeout: 30_000,
+    });
+  }
+  return brevoTransport.sendMail({
+    // The relay sends as the confirmed Brevo sender, not the relay login.
+    from: `"${MAIL_FROM_NAME}" <${MAIL_FROM_ADDRESS}>`,
+    to: list(input.to).join(", "),
+    cc: list(input.cc).join(", ") || undefined,
+    replyTo: input.replyTo,
+    subject: input.subject,
+    text: input.text,
+    html: input.html,
+    attachments: input.attachments,
+  });
+}
+
+function describeBrevoSmtpError(error: unknown): string {
+  const err = error as { message?: string; responseCode?: number } | undefined;
+  const message = err?.message ?? "";
+  if (/ip address/i.test(message)) {
+    return (
+      "Brevo's SMTP relay refused this server's IP address. Deactivate Authorised IPs at " +
+      "https://app.brevo.com/security/authorised_ips (or add this server's IP there)."
+    );
+  }
+  if (err?.responseCode === 535 || /invalid login|authentication/i.test(message)) {
+    return "Brevo's SMTP relay rejected the login. Check BREVO_SMTP_KEY and BREVO_SMTP_LOGIN.";
+  }
+  if (isCertificateError(error)) return CERTIFICATE_ADVICE(BREVO_SMTP_HOST);
+  return `Brevo's SMTP relay refused the message. ${message}`.trim();
+}
+
+/**
+ * Tries every configured route in turn - Brevo API, Brevo SMTP relay, then
+ * the plain SMTP account - and only fails once all of them have.
+ */
 export async function sendMail(input: SendMailInput) {
   if (!isMailConfigured()) {
     throw new Error(
@@ -434,24 +551,34 @@ export async function sendMail(input: SendMailInput) {
 
   const reasons: string[] = [];
 
-  if (BREVO_API_KEY && MAIL_FROM_ADDRESS) {
+  if (hasBrevoApi()) {
     try {
       return await sendViaBrevo(input);
     } catch (error) {
-      console.error("[mail] Brevo delivery failed:", error);
+      console.error("[mail] Brevo API delivery failed:", error);
       reasons.push(describeBrevoError(error));
-      // Keep SMTP as a second chance when it is also configured.
-      if (!(SMTP_USER && SMTP_PASS)) throw new DeliveryError(reasons);
     }
   }
 
-  try {
-    return await sendViaSmtp(input);
-  } catch (error) {
-    console.error("[mail] SMTP delivery failed:", error);
-    reasons.push(describeMailError(error));
-    throw new DeliveryError(reasons);
+  if (hasBrevoSmtp()) {
+    try {
+      return await sendViaBrevoSmtp(input);
+    } catch (error) {
+      console.error("[mail] Brevo SMTP delivery failed:", error);
+      reasons.push(describeBrevoSmtpError(error));
+    }
   }
+
+  if (hasGmailSmtp()) {
+    try {
+      return await sendViaSmtp(input);
+    } catch (error) {
+      console.error("[mail] SMTP delivery failed:", error);
+      reasons.push(describeMailError(error));
+    }
+  }
+
+  throw new DeliveryError(reasons);
 }
 
 /** Sends an email already built by one of the template builders. */
@@ -483,18 +610,25 @@ export async function deliver(
     replyTo?: string;
     attachments?: MailAttachment[];
   },
-): Promise<{ delivered: boolean; reason?: string }> {
+): Promise<{ delivered: boolean; reason?: string; detail?: string }> {
   if (!isMailConfigured()) {
-    return { delivered: false, reason: "Email delivery is not configured on the server." };
+    return { delivered: false, reason: UNDELIVERED, detail: "Email delivery is not configured on the server." };
   }
   try {
     await sendComposed(email, routing);
     return { delivered: true };
   } catch (error) {
-    console.error(`[mail] ${label} could not be delivered:`, error);
-    return { delivered: false, reason: describeMailError(error) };
+    // Every provider's reason goes to the log; the person on the form only
+    // needs to know what to do next, not which mail server complained.
+    const detail =
+      error instanceof DeliveryError ? error.reasons.join(" | ") : describeMailError(error);
+    console.error(`[mail] ${label} could not be delivered: ${detail}`);
+    return { delivered: false, reason: UNDELIVERED, detail };
   }
 }
+
+/** What a form tells its user when the email copy could not be sent. */
+const UNDELIVERED = "Please try again in a few minutes, or contact the organiser if this keeps happening.";
 
 /**
  * A best-effort send for courtesy copies (acknowledgements, mentor copies).
@@ -518,3 +652,20 @@ export async function sendQuietly(
     return false;
   }
 }
+
+/**
+ * A certificate the mail server did not issue - almost always antivirus "mail
+ * shield" scanning (Avast, AVG, Kaspersky...) or a proxy re-signing the
+ * connection on the machine running the app. Not a network outage, so it is
+ * reported as what it is.
+ */
+function isCertificateError(error: unknown): boolean {
+  const message = String((error as { message?: string } | undefined)?.message ?? "");
+  return /self[- ]signed certificate|unable to verify the first certificate|unable to get local issuer certificate|certificate has expired|CERT_/i.test(message);
+}
+
+const CERTIFICATE_ADVICE = (host: string) =>
+  `The connection to ${host} presented a certificate it did not issue, so it was refused. ` +
+  "Something on this machine or network is intercepting mail traffic - usually antivirus " +
+  "email scanning (e.g. Avast Mail Shield). Turn off its outgoing-mail scanning, or trust its " +
+  "root certificate with NODE_EXTRA_CA_CERTS.";

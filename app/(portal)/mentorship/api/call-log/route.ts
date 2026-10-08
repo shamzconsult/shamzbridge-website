@@ -15,6 +15,7 @@ import {
 import { db, isDbConfigured, record } from "@/mentorship/lib/db";
 import { callLogEmail } from "@/mentorship/lib/email-templates";
 import { FEEDBACK_INBOX, deliver, isMailConfigured } from "@/mentorship/lib/mail";
+import { requireVerifiedSender } from "@/mentorship/lib/otp";
 
 export const runtime = "nodejs";
 
@@ -46,6 +47,10 @@ export async function POST(request: Request) {
 
   const loggedBy = body.loggedBy === "mentor" ? "mentor" : body.loggedBy === "mentee" ? "mentee" : null;
   if (!loggedBy) return fail("Please say whether you are the mentor or the mentee.", 400);
+
+  // Only the person whose roster email received the code may log as them.
+  const denied = await requireVerifiedSender(request, loggedBy, String(body.personId ?? ""));
+  if (denied) return denied;
 
   let mentor: Mentor | undefined;
   let mentees: Student[];

@@ -20,6 +20,8 @@ import {
 import { FileDropzone } from "@/mentorship/components/FileDropzone";
 import { MenteeMultiSelect } from "@/mentorship/components/MenteeMultiSelect";
 import { MentorPicker } from "@/mentorship/components/MentorPicker";
+import { useOtpVerification } from "@/mentorship/components/OtpVerification";
+import { OTP_HEADER } from "@/mentorship/lib/otp-shared";
 import { QuestionFields, answeredCount, allAnswered } from "@/mentorship/components/QuestionFields";
 import { SiteFooter, SiteHeader } from "@/mentorship/components/SiteHeader";
 import { StatusMessage } from "@/mentorship/components/StatusMessage";
@@ -66,6 +68,7 @@ export default function MentorPage() {
   const [notice, setNotice] = useState("");
   const [message, setMessage] = useState("");
   const [showErrors, setShowErrors] = useState(false);
+  const { verify, otpDialog } = useOtpVerification();
 
   const topRef = useRef<HTMLDivElement>(null);
   const mentor = getMentorById(mentorId);
@@ -151,6 +154,12 @@ export default function MentorPage() {
   /* ---------- Submit ---------- */
   async function handleSubmit() {
     if (!mentor) return;
+
+    // Prove the selected person is the one reporting: a code goes to their
+    // roster email and the report only proceeds once it is entered.
+    const ticket = await verify("mentor", mentor.id);
+    if (!ticket) return;
+
     setStatus("submitting");
     setMessage("");
 
@@ -170,7 +179,11 @@ export default function MentorPage() {
     files.forEach((file) => body.append("files", file));
 
     try {
-      const response = await fetch("/api/mentor-feedback", { method: "POST", body });
+      const response = await fetch("/api/mentor-feedback", {
+        method: "POST",
+        headers: { [OTP_HEADER]: ticket },
+        body,
+      });
       const result = await response.json().catch(() => ({}));
 
       if (!response.ok) {
@@ -629,6 +642,8 @@ export default function MentorPage() {
           </p>
         </div>
       </main>
+
+      {otpDialog}
 
       <SiteFooter />
     </>

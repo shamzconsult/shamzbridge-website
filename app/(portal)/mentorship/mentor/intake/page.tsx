@@ -9,6 +9,8 @@ import { MentorPicker } from "@/mentorship/components/MentorPicker";
 import { QuestionFields, allAnswered, answeredCount } from "@/mentorship/components/QuestionFields";
 import { SiteFooter, SiteHeader } from "@/mentorship/components/SiteHeader";
 import { StatusMessage } from "@/mentorship/components/StatusMessage";
+import { useOtpVerification } from "@/mentorship/components/OtpVerification";
+import { OTP_HEADER } from "@/mentorship/lib/otp-shared";
 import { MENTOR_INTAKE_QUESTIONS } from "@/mentorship/data/forms";
 import { HOST_COMPANY, getMentorById, getStudentsInGroup, groupLabel } from "@/mentorship/data/program";
 
@@ -22,6 +24,7 @@ export default function MentorIntakePage() {
   /** Set when the entry was saved but its email notification failed. */
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
+  const { verify, otpDialog } = useOtpVerification();
 
   const mentor = getMentorById(mentorId);
   const group = mentor ? getStudentsInGroup(mentor.groupId) : [];
@@ -45,13 +48,18 @@ export default function MentorIntakePage() {
     event.preventDefault();
     if (!mentor) return;
 
+    // Prove the selected person is the one submitting: a code goes to their
+    // roster email and the form only proceeds once it is entered.
+    const ticket = await verify("mentor", mentor.id);
+    if (!ticket) return;
+
     setStatus("submitting");
     setError("");
 
     try {
       const response = await fetch("/api/intake", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", [OTP_HEADER]: ticket },
         body: JSON.stringify({ role: "mentor", personId: mentor.id, answers }),
       });
       const result = await response.json().catch(() => ({}));
@@ -169,6 +177,8 @@ export default function MentorIntakePage() {
           )}
         </form>
       </main>
+
+      {otpDialog}
 
       <SiteFooter />
     </>

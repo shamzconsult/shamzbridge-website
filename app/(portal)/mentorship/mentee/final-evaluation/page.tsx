@@ -8,6 +8,8 @@ import { LikertGrid, ratedCount } from "@/mentorship/components/LikertGrid";
 import { SiteFooter, SiteHeader } from "@/mentorship/components/SiteHeader";
 import { StatusMessage } from "@/mentorship/components/StatusMessage";
 import { StudentCombobox } from "@/mentorship/components/StudentCombobox";
+import { useOtpVerification } from "@/mentorship/components/OtpVerification";
+import { OTP_HEADER } from "@/mentorship/lib/otp-shared";
 import { ACCENT } from "@/mentorship/components/accents";
 import { MENTEE_FINAL_STATEMENTS, type LikertValue } from "@/mentorship/data/forms";
 import { HOST_COMPANY, fullName, getMentorForStudent, type Student } from "@/mentorship/data/program";
@@ -15,12 +17,6 @@ import { cn } from "@/mentorship/lib/utils";
 
 type Status = "idle" | "checking" | "locked" | "submitting" | "error" | "success";
 
-/**
- * Section 6.0 — Mentee's Final Evaluation Sheet.
- *
- * Runs once, at the end of the programme, and rates the mentor across eleven
- * statements on the same 1–5 scale as the paper sheet.
- */
 export default function MenteeFinalEvaluationPage() {
   const [student, setStudent] = useState<Student | null>(null);
   const [location, setLocation] = useState("");
@@ -33,6 +29,7 @@ export default function MenteeFinalEvaluationPage() {
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
   const [average, setAverage] = useState<number | null>(null);
+  const { verify, otpDialog } = useOtpVerification();
 
   const mentor = student ? getMentorForStudent(student) : undefined;
   const done = ratedCount(MENTEE_FINAL_STATEMENTS, ratings);
@@ -57,13 +54,18 @@ export default function MenteeFinalEvaluationPage() {
     event.preventDefault();
     if (!student) return;
 
+    // Prove the selected person is the one submitting: a code goes to their
+    // roster email and the form only proceeds once it is entered.
+    const ticket = await verify("mentee", student.id);
+    if (!ticket) return;
+
     setStatus("submitting");
     setError("");
 
     try {
       const response = await fetch("/api/final-evaluation", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", [OTP_HEADER]: ticket },
         body: JSON.stringify({
           role: "mentee",
           personId: student.id,
@@ -254,6 +256,8 @@ export default function MenteeFinalEvaluationPage() {
           />
         </form>
       </main>
+
+      {otpDialog}
 
       <SiteFooter />
     </>

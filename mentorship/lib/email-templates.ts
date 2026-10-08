@@ -687,3 +687,32 @@ export function averageOf(values: Array<number | null>): number | null {
   if (answered.length === 0) return null;
   return answered.reduce((sum, value) => sum + value, 0) / answered.length;
 }
+
+/* ==========================================================================
+ * 7. VERIFICATION CODE — sent to the roster address before a form is accepted
+ * ========================================================================== */
+
+export function otpEmail(data: { name: string; code: string; minutes: number }): ComposedEmail {
+  return compose(
+    `Your verification code: ${data.code} — ${PROGRAM.name}`,
+    "Verification Code",
+    BRAND,
+    [
+      {
+        type: "note",
+        text: `Hi ${data.name}, someone is submitting a form on the ${PROGRAM.name} mentorship feedback channel under your name. If that is you, enter the code below to confirm.`,
+      },
+      {
+        type: "meta",
+        rows: [
+          ["Verification code", data.code],
+          ["Expires", `In ${data.minutes} minutes`],
+        ],
+      },
+      {
+        type: "note",
+        text: `The code works once. If you did not request it, you can ignore this email — nothing will be submitted without it. You may want to let ${HOST_COMPANY.name} know.`,
+      },
+    ],
+  );
+}

@@ -19,6 +19,8 @@ import { FileDropzone } from "@/mentorship/components/FileDropzone";
 import { SiteFooter, SiteHeader } from "@/mentorship/components/SiteHeader";
 import { StatusMessage } from "@/mentorship/components/StatusMessage";
 import { StudentCombobox } from "@/mentorship/components/StudentCombobox";
+import { useOtpVerification } from "@/mentorship/components/OtpVerification";
+import { OTP_HEADER } from "@/mentorship/lib/otp-shared";
 import {
   PROGRAM,
   fullName,
@@ -39,6 +41,7 @@ export default function MenteePage() {
   /** Set when the entry was saved but its email notification failed. */
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
+  const { verify, otpDialog } = useOtpVerification();
 
   const mentor = student ? getMentorForStudent(student) : undefined;
   const canReachMentor = isMentorContactable(mentor);
@@ -51,6 +54,11 @@ export default function MenteePage() {
     event.preventDefault();
     if (!student || !canSubmit) return;
 
+    // Prove the selected person is the one sending: a code goes to their
+    // roster email and the message only proceeds once it is entered.
+    const ticket = await verify("mentee", student.id);
+    if (!ticket) return;
+
     setStatus("submitting");
     setError("");
 
@@ -60,7 +68,11 @@ export default function MenteePage() {
     files.forEach((file) => body.append("files", file));
 
     try {
-      const response = await fetch("/api/mentee-message", { method: "POST", body });
+      const response = await fetch("/api/mentee-message", {
+        method: "POST",
+        headers: { [OTP_HEADER]: ticket },
+        body,
+      });
       const result = await response.json().catch(() => ({}));
 
       if (!response.ok) {
@@ -305,6 +317,8 @@ export default function MenteePage() {
           )}
         </form>
       </main>
+
+      {otpDialog}
 
       <SiteFooter />
     </>

@@ -24,6 +24,7 @@ import {
   sendQuietly,
 } from "@/mentorship/lib/mail";
 import { db, ensureSchema, isDbConfigured, record } from "@/mentorship/lib/db";
+import { requireVerifiedSender } from "@/mentorship/lib/otp";
 
 export const runtime = "nodejs";
 
@@ -77,6 +78,12 @@ export async function POST(request: Request) {
 
   const answers = body.answers ?? {};
   const personId = String(body.personId ?? "");
+
+  if (body.role === "mentee" || body.role === "mentor") {
+    // Only the person whose roster email received the code may submit as them.
+    const denied = await requireVerifiedSender(request, body.role, personId);
+    if (denied) return denied;
+  }
 
   if (body.role === "mentee") return submitMenteeIntake(personId, answers);
   if (body.role === "mentor") return submitMentorIntake(personId, answers);

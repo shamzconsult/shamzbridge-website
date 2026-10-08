@@ -11,6 +11,7 @@ import {
 import { db, isDbConfigured, record } from "@/mentorship/lib/db";
 import { menteeMessageEmail, type MenteeMessageEmail } from "@/mentorship/lib/email-templates";
 import { FEEDBACK_INBOX, deliver, isMailConfigured } from "@/mentorship/lib/mail";
+import { requireVerifiedSender } from "@/mentorship/lib/otp";
 import { prepareResources } from "@/mentorship/lib/uploads";
 
 export const runtime = "nodejs";
@@ -38,6 +39,10 @@ export async function POST(request: Request) {
   /* ---- Who is sending? -------------------------------------------------- */
   const student = getStudentById(String(form.get("studentId") ?? ""));
   if (!student) return fail("Please find and select your name from the list.", 400);
+
+  // Only the person whose roster email received the code may send as them.
+  const denied = await requireVerifiedSender(request, "mentee", student.id);
+  if (denied) return denied;
 
   /* ---- Who does it go to? ----------------------------------------------- */
   const mentor = getMentorForStudent(student);

@@ -25,6 +25,7 @@ import {
   isMailConfigured,
   sendQuietly,
 } from "@/mentorship/lib/mail";
+import { requireVerifiedSender } from "@/mentorship/lib/otp";
 
 export const runtime = "nodejs";
 
@@ -82,6 +83,12 @@ export async function POST(request: Request) {
     body = await request.json();
   } catch {
     return fail("We could not read your submission. Please try again.", 400);
+  }
+
+  if (body.role === "mentee" || body.role === "mentor") {
+    // Only the person whose roster email received the code may submit as them.
+    const denied = await requireVerifiedSender(request, body.role, String(body.personId ?? ""));
+    if (denied) return denied;
   }
 
   if (body.role === "mentee") return submitMenteeFinal(body);
